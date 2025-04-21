@@ -1,0 +1,56 @@
+/* static/css/custom.css */
+
+/* Базовые стили для всего сайта */
+body {
+    background-color: #ffffff; /* Белый фон */
+    color: #5508bf; /* Основной фиолетовый текст */
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+}
+
+/* Устанавливаем фиолетовый цвет текста для всех элементов */
+* {
+    color: #5508bf;
+}
+
+/* Стили для ссылок */
+a {
+    color: #5508bf;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #300472; /* Более тёмный фиолетовый для ховера */
+    text-decoration: underline;
+}
+
+/* Стили для header */
+header {
+    border-bottom: 2px solid #5508bf; /* Тонкая фиолетовая граница снизу */
+    background-color: #ffffff; /* Белый фон */
+    padding: 0.66rem 0; /* Уменьшенный отступ для меньшей высоты */
+    box-shadow: 0 2px 5px rgba(85, 8, 191, 0.2);
+}
+
+/* Стили для контейнера */
+.container {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    position: relative;
+}
+
+/* Стили для логотипа */
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #5508bf; /* Тёмный фиолет для лого */
+    transition: color 0.3s ease; /* Плавный ховер */
+    position: relative;
+}
+
+.logo:hover {
+    color: #300472; /* Основной фиолетовый при наведении */
+    text-decoration: none; /* Убираем подчёркивание при ховере */
+}
