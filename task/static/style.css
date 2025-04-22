@@ -4,7 +4,7 @@
 body {
     background-color: #ffffff; /* Белый фон */
     color: #5508bf; /* Основной фиолетовый текст */
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Ubuntu', Arial, sans-serif; /* Ubuntu как основной шрифт */
     font-weight: 400;
 }
 
@@ -35,22 +35,35 @@ header {
 /* Стили для контейнера */
 .container {
     display: flex;
+    justify-content: space-between; /* Разделяем левую и правую части */
     align-items: center;
     padding: 0 1rem;
-    position: relative;
+}
+
+/* Стили для левой части хэдера */
+.header-left {
+    display: flex;
+    align-items: center;
+    transform: translateX(-10rem); /* Сдвиг всей левой части влево */
+}
+
+/* Стили для правой части хэдера */
+.header-right {
+    display: flex;
+    align-items: center;
 }
 
 /* Стили для логотипа */
 .logo {
+    font-family: 'Ubuntu', Arial, sans-serif; /* Ubuntu для лого */
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: 700; /* Жирный для пацанского вайба */
     text-transform: uppercase;
-    color: #5508bf; /* Тёмный фиолет для лого */
+    color: #300472; /* Тёмный фиолет для лого */
     transition: color 0.3s ease; /* Плавный ховер */
-    position: relative;
 }
 
 .logo:hover {
-    color: #300472; /* Основной фиолетовый при наведении */
+    color: #5508bf; /* Основной фиолетовый при наведении */
     text-decoration: none; /* Убираем подчёркивание при ховере */
 }
