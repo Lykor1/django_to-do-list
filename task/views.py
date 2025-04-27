@@ -1,4 +1,5 @@
 from django.shortcuts import render
 
+
 def index(request):
-    return render(request, 'task/home.html', {'hello':'Добро поржаловать, пидорасы!'})
+    return render(request, 'task/home.html', {'hello': 'Добро поржаловать, пидорасы!'})

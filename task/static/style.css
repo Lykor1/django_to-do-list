@@ -1,5 +1,3 @@
-/* static/css/custom.css */
-
 /* Базовые стили для всего сайта */
 body {
     background-color: #ffffff; /* Белый фон */
@@ -37,20 +35,25 @@ header {
     display: flex;
     justify-content: space-between; /* Разделяем левую и правую части */
     align-items: center;
-    padding: 0 1rem;
+    padding: 0 3rem;
+    max-width: none;
+    margin: 0 auto;
+    width: 100%;
 }
 
 /* Стили для левой части хэдера */
 .header-left {
     display: flex;
     align-items: center;
-    transform: translateX(-10rem); /* Сдвиг всей левой части влево */
+    /*margin-right: auto;*/
 }
 
 /* Стили для правой части хэдера */
 .header-right {
     display: flex;
     align-items: center;
+    gap: 1rem; /* Отступ между кнопками */
+    /*margin-left: auto;*/
 }
 
 /* Стили для логотипа */
@@ -59,11 +62,264 @@ header {
     font-size: 1.5rem;
     font-weight: 700; /* Жирный для пацанского вайба */
     text-transform: uppercase;
-    color: #300472; /* Тёмный фиолет для лого */
+    color: #5508bf; /* Тёмный фиолет для лого */
     transition: color 0.3s ease; /* Плавный ховер */
 }
 
 .logo:hover {
-    color: #5508bf; /* Основной фиолетовый при наведении */
+    color: #300472; /* Основной фиолетовый при наведении */
     text-decoration: none; /* Убираем подчёркивание при ховере */
 }
+
+/* Общие стили для кнопок */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+/* Кнопка входа */
+.btn-login {
+    background-color: #5508bf;
+    color: white;
+    border-color: #5508bf;
+}
+
+.btn-login:hover {
+    background-color: #300472;
+    color: white;
+    text-decoration: none;
+}
+
+/* Кнопка регистрации */
+.btn-register {
+    background-color: #5508bf;
+    color: white;
+}
+
+.btn-register:hover {
+    background-color: #300472;
+    color: white;
+    text-decoration: none;
+}
+
+/* Стили для выпадающего списка */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.btn-dropdown {
+    background-color: #5508bf;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative; /* Добавляем для z-index */
+    z-index: 2; /* Чтобы кнопка была над выпадающим списком при раскрытии */
+}
+
+.btn-dropdown:hover {
+    background-color: #300472;
+    color: white;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%; /* Прижимаем к нижнему краю кнопки */
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(85, 8, 191, 0.2);
+    z-index: 1;
+    border-radius: 4px 4px 4px 4px; /* Закругляем только нижние углы */
+    overflow: hidden;
+    border: 1px solid #5508bf;
+    margin-top: 0; /* Убираем отступ сверху */
+}
+
+.dropdown-content a {
+    color: #5508bf;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    background-color: white;
+    border: none;
+    width: 100%;
+    font-family: 'Ubuntu', sans-serif;
+    /*font-size: 0.9rem;*/
+    cursor: pointer;
+    margin: 0;
+}
+
+.dropdown-content a:hover {
+    background-color: #5508bf;
+    color: white;
+}
+
+.dropdown-item {
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 400;
+    padding: 12px 16px;
+    text-align: left;
+    background: none;
+    color: #ff0000 !important; /* Красный текст */
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #ff0000 !important; /* Красный фон при наведении */
+    color: white !important; /* Белый текст при наведении */
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+    display: block;
+}
+
+/* Делаем кнопку "Выйти" на всю ширину */
+.dropdown-content form {
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+}
+
+/* Добавляем плавное раскрытие */
+.dropdown-content {
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+}
+
+/* Стили для страницы входа */
+.login-container {
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 2rem;
+    border: 2px solid #5508bf;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.login-title {
+    text-align: center;
+    color: #5508bf;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.login-error {
+    color: #ff0000;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-field label {
+    text-align: left;
+    color: #5508bf;
+    font-weight: 500;
+}
+
+.form-field input {
+    padding: 0.75rem;
+    border: 2px solid #5508bf;
+    border-radius: 4px;
+    font-family: 'Ubuntu', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.form-field input:focus {
+    outline: none;
+    border-color: #300472;
+    box-shadow: 0 0 0 3px rgba(85, 8, 191, 0.2);
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.btn-cancel {
+    background-color: white;
+    color: #ff0000;
+    border: 2px solid #ff0000;
+    text-transform: uppercase;
+}
+
+.btn-cancel:hover {
+    background-color: #ff0000;
+    color: white;
+    text-decoration: none;
+}
+
+/* Ссылка "Забыли пароль?" */
+.forgot-password {
+    color: #5508bf;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+.forgot-password:hover {
+    color: #300472;
+}
+
+/* Ссылка на регистрацию */
+.register-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #5508bf;
+}
+
+.register-link a {
+    color: #5508bf;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.register-link a:hover {
+    color: #300472;
+}
+

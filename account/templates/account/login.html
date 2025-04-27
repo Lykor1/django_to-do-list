@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}
+    Вход
+{% endblock %}
+
+{% block content %}
+    <div class="login-container">
+        <h1 class="login-title">Вход</h1>
+        <form action="{% url 'account:login' %}" method="post" class="login-form">
+            {% csrf_token %}
+            <div class="form-field">
+                <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
+                {{ form.username }}
+            </div>
+            <div class="form-field">
+                <label for="{{ form.password.id_for_label }}">Пароль</label>
+                {{ form.password }}
+                <a href="#" class="forgot-password">Забыли пароль?</a>
+            </div>
+            <input type="hidden" name="next" value="{{ next }}">
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-login">Войти</button>
+                <a href="{% url 'task:home' %}" class="btn btn-cancel">Отмена</a>
+            </div>
+            <div class="register-link">
+                Нет аккаунта? <a href="#">Зарегистрируйтесь</a>.
+            </div>
+        </form>
+    </div>
+{% endblock %}
