@@ -323,3 +323,45 @@ header {
     color: #300472;
 }
 
+/* Стили для страницы смены пароля */
+.password-change-container {
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 2rem;
+    border: 2px solid #5508bf;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.password-change-title {
+    text-align: center;
+    color: #5508bf;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.password-change-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.password-change-error {
+    color: #ff0000;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.password-change-success {
+    color: #5508bf;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.password-change-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}

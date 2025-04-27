@@ -17,7 +17,7 @@
             <div class="form-field">
                 <label for="{{ form.password.id_for_label }}">Пароль</label>
                 {{ form.password }}
-                <a href="#" class="forgot-password">Забыли пароль?</a>
+                <a href="{% url 'account:password_reset' %}" class="forgot-password">Забыли пароль?</a>
             </div>
             <input type="hidden" name="next" value="{{ next }}">
             <div class="form-buttons">
