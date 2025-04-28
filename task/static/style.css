@@ -414,3 +414,53 @@ header {
 .mt-1 {
     margin-top: 0.25rem;
 }
+
+/* Стили для страницы профиля */
+.profile-container {
+    max-width: 600px; /* Или другая подходящая ширина */
+    margin: 3rem auto;
+    padding: 2rem;
+    border: 2px solid #5508bf;
+    border-radius: 8px;
+    background-color: white;
+    /* text-align: center;  - УБРАТЬ, если было */
+}
+
+.profile-title {
+    text-align: center; /* Заголовок можно оставить по центру */
+    color: #5508bf;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.profile-details {
+    margin-bottom: 2rem; /* Отступ под деталями перед кнопками */
+    text-align: left; /* Выравниваем детали по левому краю */
+}
+
+.profile-details p {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.profile-details p strong {
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+/* Стили для блока кнопок (вертикально, слева) */
+.profile-buttons-vertical-left {
+    display: flex; /* Используем flexbox */
+    flex-direction: column; /* Располагаем элементы (кнопки) в колонку */
+    align-items: flex-start; /* Выравниваем кнопки по левому краю */
+    gap: 1rem; /* Отступ между кнопками */
+    margin-top: 1.5rem; /* Отступ сверху от блока .profile-details */
+    width: fit-content; /* Ширина блока по содержимому (кнопкам) */
+}
+
+/* Стили для самих кнопок внутри блока */
+.profile-buttons-vertical-left .btn {
+     min-width: 180px; /* Например, чтобы они были одинаковой ширины */
+     text-align: center; /* Текст внутри кнопки по центру */
+}

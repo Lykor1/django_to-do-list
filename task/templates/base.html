@@ -26,7 +26,7 @@
                 <div class="dropdown">
                     <button class="btn btn-dropdown">{{ user.username }}</button>
                     <div class="dropdown-content">
-                        <a href="#">Профиль</a>
+                        <a href="{% url 'account:profile' %}">Профиль</a>
                         <form method="post" action="{% url 'account:logout' %}">
                             {% csrf_token %}
                             <button type="submit" class="dropdown-item">Выйти</button>

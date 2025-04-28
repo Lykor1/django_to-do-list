@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordResetView, \
     PasswordResetDoneView, PasswordResetConfirmView
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 
 from .forms import UserRegistrationForm
@@ -67,3 +68,9 @@ def register(request):
     else:
         user_form = UserRegistrationForm()
     return render(request, 'account/register.html', {'user_form': user_form})
+
+
+@login_required
+def profile(request):
+    user = request.user
+    return render(request, 'account/profile.html', {'user': user})

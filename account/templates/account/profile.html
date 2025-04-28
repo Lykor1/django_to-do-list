@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}
+    Профиль пользователя
+{% endblock %}
+
+{% block content %}
+    <div class="profile-container">
+        <h2 class="profile-title">Профиль "{{ user.username }}"</h2>
+        <div class="profile-details">
+            <p><strong>Электронная почта:</strong> {{ user.email }}</p>
+            <p><strong>Имя:</strong> {% if user.first_name %}{{ user.first_name }}{% else %}---{% endif %} </p>
+            <p><strong>Фамилия:</strong> {% if user.last_name %}{{ user.last_name }}{% else %}---{% endif %}</p>
+            <p><strong>Дата регистрации:</strong> {{ user.date_joined|date:"d.m.Y" }}</p>
+        </div>
+        <div class="profile-buttons profile-buttons-vertical-left">
+            <a href="#" class="btn btn-login">Редактировать профиль</a>
+            <a href="{% url 'account:password_change' %}" class="btn btn-login">Изменить пароль</a>
+            <a href="#" class="btn btn-cancel">Удалить профиль</a>
+        </div>
+    </div>
+{% endblock %}
