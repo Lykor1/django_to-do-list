@@ -47,3 +47,44 @@ class UserRegistrationForm(forms.ModelForm):
         elif password != password2:
             raise forms.ValidationError('Пароли не совпадают.')
         return password2
+
+
+class ProfileEditForm(forms.ModelForm):
+    username = forms.CharField(max_length=150, required=True, label='Имя пользователя')
+    email = forms.EmailField(required=True, label='Электронная почта')
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name')
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileEditForm, self).__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:
+            self.fields['username'].initial = self.instance.username
+            self.fields['email'].initial = self.instance.email
+            self.fields['first_name'].initial = self.instance.first_name
+            self.fields['last_name'].initial = self.instance.last_name
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if self.instance and self.instance.pk and username and username != self.instance.username:
+            if User.objects.filter(username=username).exclude(pk=self.instance.pk).exists():
+                raise forms.ValidationError('Это имя пользователя уже используется.')
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if self.instance and self.instance.pk and email and email != self.instance.email:
+            if User.objects.filter(email__iexact=email).exclude(pk=self.instance.pk).exists():
+                raise forms.ValidationError('Этот адрес электронной почты уже используется.')
+        return email
+
+    def save(self, commit=True):
+        user = super(ProfileEditForm, self).save(commit=False)
+        user.username = self.cleaned_data['username']
+        user.email = self.cleaned_data['email']
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        if commit:
+            user.save()
+        return user

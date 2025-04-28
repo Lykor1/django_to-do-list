@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Редактирование профиля
+{% endblock %}
+
+{% block content %}
+    <div class="profile-container">
+        <h2 class="profile-title">Редактирование профиля</h2>
+        <form method="post" class="register-form">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-field">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-login">Сохранить</button>
+                <a href="{% url 'account:profile' %}" class="btn btn-cancel">Отмена</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

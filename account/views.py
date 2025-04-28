@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordResetView, \
     PasswordResetDoneView, PasswordResetConfirmView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, ProfileEditForm
 
 
 class TaskLoginView(LoginView):
@@ -28,9 +30,10 @@ class TaskLogoutView(LogoutView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class TaskPasswordChangeView(PasswordChangeView):
+class TaskPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     template_name = 'account/password_change_form.html'
     success_url = reverse_lazy('task:home')
+    login_url = reverse_lazy('account:login')
 
     def form_valid(self, form):
         messages.success(self.request, 'Пароль успешно изменён!')
@@ -74,3 +77,16 @@ def register(request):
 def profile(request):
     user = request.user
     return render(request, 'account/profile.html', {'user': user})
+
+
+@login_required
+def profile_edit(request):
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Ваш профиль успешно изменён!')
+            return redirect('account:profile')
+    else:
+        form = ProfileEditForm(instance=request.user)
+    return render(request, 'account/profile_edit.html', {'form': form})

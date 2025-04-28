@@ -12,5 +12,6 @@ urlpatterns = [
     path('password_reset/<uidb64>/<token>/', views.TaskPasswordResetConfirmView.as_view(),
          name='password_reset_confirm'),
     path('register/', views.register, name='register'),
+    path('profile/edit/', views.profile_edit, name='profile_edit'),
     path('profile/', views.profile, name='profile'),
 ]
