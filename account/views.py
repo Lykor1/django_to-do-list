@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordResetView, \
     PasswordResetDoneView, PasswordResetConfirmView
@@ -67,15 +67,15 @@ class TaskPasswordResetConfirmView(PasswordResetConfirmView):
         return super().form_invalid(form)
 
 
-def registrer(request):
+def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            messages.success(request, f'Вы зарегистрированы как {new_user.cleaned_data["username"]}!')
-            return reverse_lazy('account:login')
+            messages.success(request, f'Вы зарегистрированы как {user_form.cleaned_data["username"]}!')
+            return redirect('account:login')
     else:
         user_form = UserRegistrationForm()
     return render(request, 'account/register.html', {'user_form': user_form})

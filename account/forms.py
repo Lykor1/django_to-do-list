@@ -1,10 +1,10 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.password_validation import validate_password, get_default_password_validators
+from django.contrib.auth.password_validation import validate_password, password_validators_help_text_html
 
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput, label='Пароль', help_text=get_default_password_validators())
+    password = forms.CharField(widget=forms.PasswordInput, label='Пароль', help_text=password_validators_help_text_html)
     password2 = forms.CharField(widget=forms.PasswordInput, label='Повторите пароль')
     email = forms.EmailField(required=True, label='Электронная почта')
 
@@ -34,15 +34,16 @@ class UserRegistrationForm(forms.ModelForm):
             try:
                 validate_password(password, self.instance)
             except forms.ValidationError as error:
-                raise forms.ValidationError(error.message)
+                raise forms.ValidationError(error)
+        else:
+            raise forms.ValidationError('Введите пароль.')
         return password
 
-    def clean(self):
-        cleaned_data = super().clean()
-        password = cleaned_data.get('password')
-        password2 = cleaned_data.get('password2')
+    def clean_password2(self):
+        password = self.cleaned_data.get('password')
+        password2 = self.cleaned_data.get('password2')
         if not password2:
-            raise forms.ValidationError('Повторите пароль.')
-        if password and password2 and password != password2:
+            forms.ValidationError('Повторите пароль.')
+        elif password != password2:
             raise forms.ValidationError('Пароли не совпадают.')
-        return cleaned_data
+        return password2
