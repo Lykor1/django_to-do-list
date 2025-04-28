@@ -13,5 +13,6 @@ urlpatterns = [
          name='password_reset_confirm'),
     path('register/', views.register, name='register'),
     path('profile/edit/', views.profile_edit, name='profile_edit'),
+    path('profile/delete/', views.profile_delete, name='profile_delete'),
     path('profile/', views.profile, name='profile'),
 ]

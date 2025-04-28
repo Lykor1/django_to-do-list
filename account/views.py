@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordResetView, \
     PasswordResetDoneView, PasswordResetConfirmView
 from django.contrib.auth.decorators import login_required
@@ -90,3 +90,30 @@ def profile_edit(request):
     else:
         form = ProfileEditForm(instance=request.user)
     return render(request, 'account/profile_edit.html', {'form': form})
+
+
+# @login_required
+# def profile_delete(request):
+#     if request.method == 'POST':
+#         user = request.user
+#         user.delete()
+#         logout(request)
+#         messages.success(request, 'Ваш профиль был удалён.')
+#         return redirect(reverse_lazy('task:home'))
+#     return redirect('account:profile')
+
+@login_required
+def profile_delete(request):
+    if request.method == 'POST':
+        try:
+            user = request.user
+            user.delete()
+            logout(request)
+            messages.success(request, 'Ваш профиль был удален.')
+            return redirect(reverse_lazy('task:home'))
+        except Exception as e:
+            messages.error(request, f'Произошла ошибка при удалении профиля: {e}')
+            return redirect('account:profile')
+
+    else:
+        return redirect('account:profile')
