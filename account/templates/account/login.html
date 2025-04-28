@@ -10,22 +10,26 @@
         <h1 class="login-title">Вход</h1>
         <form action="{% url 'account:login' %}" method="post" class="login-form">
             {% csrf_token %}
-            <div class="form-field">
-                <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
-                {{ form.username }}
-            </div>
-            <div class="form-field">
-                <label for="{{ form.password.id_for_label }}">Пароль</label>
-                {{ form.password }}
-                <a href="{% url 'account:password_reset' %}" class="forgot-password">Забыли пароль?</a>
-            </div>
+            {% for field in form %}
+                <div class="form-field">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <a href="{% url 'account:password_reset' %}" class="forgot-password">Забыли пароль?</a>
             <input type="hidden" name="next" value="{{ next }}">
             <div class="form-buttons">
                 <button type="submit" class="btn btn-login">Войти</button>
                 <a href="{% url 'task:home' %}" class="btn btn-cancel">Отмена</a>
             </div>
             <div class="register-link">
-                Нет аккаунта? <a href="#">Зарегистрируйтесь</a>.
+                Нет аккаунта? <a href="{% url 'account:register' %}">Зарегистрируйтесь</a>.
             </div>
         </form>
     </div>
