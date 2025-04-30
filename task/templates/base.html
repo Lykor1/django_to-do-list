@@ -42,15 +42,14 @@
 </header>
 
 <!-- Сообщения -->
-{% if messages %}
-    <div class="container-fluid">
-        <div class="d-flex justify-content-center">
-            <div class="col-mb-6 text-center">
-                {% bootstrap_messages %}
-            </div>
+
+<div class="container-fluid message-area">
+    <div class="d-flex justify-content-center">
+        <div class="col-mb-6 text-center">
+            {% bootstrap_messages %}
         </div>
     </div>
-{% endif %}
+</div>
 
 <!-- Основной контент -->
 {% block content %}

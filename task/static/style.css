@@ -4,6 +4,8 @@ body {
     color: #5508bf; /* Основной фиолетовый текст */
     font-family: 'Ubuntu', Arial, sans-serif; /* Ubuntu как основной шрифт */
     font-weight: 400;
+    text-align: center; /* Центрируем текст по умолчанию для body */
+    padding-top: 100px; /* Добавляем верхний отступ, чтобы контент не перекрывался хедером и сообщениями. Возможно, потребуется настроить это значение. */
 }
 
 /* Устанавливаем фиолетовый цвет текста для всех элементов */
@@ -28,10 +30,15 @@ header {
     background-color: #ffffff; /* Белый фон */
     padding: 0.66rem 0; /* Уменьшенный отступ для меньшей высоты */
     box-shadow: 0 2px 5px rgba(85, 8, 191, 0.2);
+    position: fixed; /* Фиксируем хедер */
+    width: 100%; /* Хедер на всю ширину */
+    top: 0; /* Прижимаем к верху */
+    left: 0;
+    z-index: 1000; /* Высокий z-index, чтобы хедер был поверх всего */
 }
 
-/* Стили для контейнера */
-.container {
+/* Стили для контейнера в хедере (остается для выравнивания логотипа и кнопок) */
+header .container {
     display: flex;
     justify-content: space-between; /* Разделяем левую и правую части */
     align-items: center;
@@ -461,6 +468,197 @@ header {
 
 /* Стили для самих кнопок внутри блока */
 .profile-buttons-vertical-left .btn {
-     min-width: 180px; /* Например, чтобы они были одинаковой ширины */
-     text-align: center; /* Текст внутри кнопки по центру */
+    min-width: 180px; /* Например, чтобы они были одинаковой ширины */
+    text-align: center; /* Текст внутри кнопки по центру */
+}
+
+/* Выделяем место для сообщений, чтобы предотвратить прыжки элементов */
+.message-area {
+    position: fixed; /* Фиксируем позицию относительно окна браузера */
+    top: 70px; /* Отступ сверху (ниже хедера). Настройте по необходимости */
+    left: 0;
+    right: 0;
+    z-index: 1050; /* Высокий z-index, чтобы сообщения были поверх всего (выше хедера) */
+    padding: 0 15px; /* Добавляем небольшие горизонтальные отступы */
+    /*pointer-events: none; !* Позволяет кликать сквозь этот блок, если в нем нет активных элементов *!*/
+}
+
+.message-area .container-fluid {
+    /* Дополнительные стили для внутреннего контейнера, если нужно центрировать или ограничить ширину */
+     max-width: 600px; /* Пример: ограничиваем ширину блока сообщений */
+     margin: 0 auto; /* Центрируем блок сообщений по горизонтали */
+     pointer-events: all; /* Включаем клики внутри контейнера, где находятся сами сообщения */
+}
+
+
+/* Styles for Task Card */
+.task-card {
+    border: 2px solid; /* Border will be set based on status */
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: white; /* Default background */
+    position: relative; /* Needed for absolute positioning of status */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* Увеличиваем максимальную ширину */
+    margin: 2rem auto; /* Центрируем блок по горизонтали и добавляем отступ сверху/снизу */
+    text-align: left; /* Выравниваем содержимое карточки по левому краю */
+}
+
+/* Task Status Specific Styles */
+.task-status-not_active {
+    border-color: #b0b0b0; /* Grey border */
+    background-color: #f0f0f0; /* Grey background */
+}
+
+.task-status-active {
+    border-color: #5508bf; /* Purple border */
+    background-color: white; /* White background */
+}
+
+.task-status-completed {
+    border-color: #28a745; /* Green border */
+    background-color: white; /* White background */
+}
+
+/* Task Header (for title and status indicator) */
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    text-align: center; /* Центрируем содержимое хедера */
+}
+
+/* Task Title */
+.task-title {
+    text-align: center; /* Центрируем название задачи */
+    flex-grow: 1; /* Allows title to take up available space */
+    margin: 0;
+    color: #5508bf; /* Purple text */
+}
+
+/* Task Status Indicator Square */
+.task-status-indicator {
+    width: 25px;
+    height: 25px;
+    border: 2px solid; /* Border will be set based on status */
+    border-radius: 4px;
+    position: absolute;
+    top: 1.5rem; /* Adjust as needed */
+    right: 1.5rem; /* Adjust as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: white; /* Белый фон для квадратика по умолчанию */
+}
+
+/* Task Status Indicator Colors */
+.status-not_active {
+    border-color: #b0b0b0; /* Grey border */
+    background-color: #f0f0f0; /* Grey background */
+}
+
+.status-active {
+    border-color: #5508bf; /* Purple border */
+    /* background-color: white; */ /* Уже установлено в .task-status-indicator */
+}
+
+.status-completed {
+    border-color: #28a745; /* Green border */
+    /* background-color: white; */ /* Уже установлено в .task-status-indicator */
+    color: #28a745; /* Green checkmark color */
+}
+
+/* Тонкая фиолетовая полоса */
+.purple-line {
+    border: 0;
+    height: 1px;
+    background: #5508bf; /* Фиолетовый цвет */
+    margin: 1rem 0;
+}
+
+/* Task Category and Due Date */
+.task-category,
+.task-due-date {
+    margin-bottom: 0.5rem;
+    color: #5508bf; /* Purple text */
+    text-align: left; /* Выравниваем по левому краю внутри карточки */
+}
+
+/* Subtask List */
+.subtask-list {
+    margin-top: 1.5rem;
+}
+
+.subtask-list h4 {
+    color: #5508bf; /* Purple text */
+    margin-bottom: 1rem;
+    text-align: left; /* Выравниваем по левому краю внутри карточки */
+}
+
+/* Subtask Item */
+.subtask-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Описание подзадачи */
+.subtask-description {
+    flex-grow: 1;
+    margin-right: 1rem;
+    color: #5508bf; /* Фиолетовый текст */
+    text-align: left; /* Выравниваем по левому краю внутри карточки */
+}
+
+/* Квадратик индикатора статуса подзадачи */
+.subtask-status-indicator {
+    width: 20px;
+    height: 20px;
+    border: 2px solid; /* Цвет рамки будет установлен в зависимости от статуса */
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: white; /* Белый фон для квадратика по умолчанию */
+}
+
+/* Цвета квадратика индикатора статуса подзадачи */
+.subtask-status-not_completed {
+    border-color: #5508bf; /* Фиолетовая рамка */
+    /* background-color: white; */ /* Уже установлено в .subtask-status-indicator */
+}
+
+.subtask-status-completed {
+    border-color: #28a745; /* Зеленая рамка */
+    /* background-color: white; */ /* Уже установлено в .subtask-status-indicator */
+    color: #28a745; /* Зеленый цвет для галочки */
+}
+
+/* Дата выполнения подзадачи */
+.subtask-item .small {
+    font-size: 0.8rem; /* Меньший шрифт для даты выполнения */
+    color: #6c757d; /* Приглушенный цвет для даты */
+    margin-left: 0.5rem;
+}
+
+/* Фиолетовая полоса для подзадач */
+.purple-line.subtask-line {
+    margin: 0.5rem 0; /* Меньший отступ для линий между подзадачами */
+}
+
+/* Центрируем главный заголовок списка задач */
+.container h1 {
+    text-align: center;
+}
+
+/* Центрируем текст, когда задач нет */
+.container .text-center {
+    text-align: center;
 }

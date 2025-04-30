@@ -5,5 +5,47 @@
 {% endblock %}
 
 {% block content %}
-    {{ hello }}
+    <div class="container mt-4">
+        {% if user.is_authenticated %}
+            {% for task in tasks %}
+                <div class="task-card task-status-{{ task.status|lower }}">
+                    <div class="task-header">
+                        <h2 class="task-title">{{ task.title }}</h2>
+                        <div class="task-status-indicator status-{{ task.status|lower }}">
+                            {% if task.status == 'completed' %}
+                                <span class="checkmark">&#10004;</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <hr class="purple-line">
+                    <p class="task-category"><strong>Категория:</strong> {{ task.category.name }}</p>
+                    <p class="task-due-date"><strong>Срок выполнения:</strong> {{ task.due_date|date:"d.m.Y H:i"|default:"----" }}</p>
+                    <hr class="purple-line">
+                    <div class="subtask-list">
+                        {% for subtask in task.subtasks.all %}
+                            <div class="subtask-item">
+                                <div class="subtask-description">{{ subtask.description }}
+                                    {% if subtask.is_completed %}
+                                        <span class="small text-muted">{{ subtask.completed_date|date:"d.m.Y H:i" }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="subtask-status-indicator subtask-status-{{ subtask.is_completed|yesno:'completed, not_completed' }}">
+                                    {% if subtask.is_completed %}
+                                        <span class="checkamark">&#10004;</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if not forloop.last %}
+                                <hr class="purple-line subtask-line">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">Задач пока нет.</p>
+            {% endfor %}
+        {% else %}
+            <p class="text-center">Авторизуйтесь, чтобы увидеть задачи.</p>
+        {% endif %}
+    </div>
 {% endblock %}
