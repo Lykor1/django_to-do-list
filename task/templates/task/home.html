@@ -19,12 +19,14 @@
                     </div>
                     <hr class="purple-line">
                     <p class="task-category"><strong>Категория:</strong> {{ task.category.name }}</p>
-                    <p class="task-due-date"><strong>Срок выполнения:</strong> {{ task.due_date|date:"d.m.Y H:i"|default:"----" }}</p>
+                    <p class="task-due-date"><strong>Срок
+                        выполнения:</strong> {{ task.due_date|date:"d.m.Y H:i"|default:"----" }}</p>
                     <hr class="purple-line">
                     <div class="subtask-list">
                         {% for subtask in task.subtasks.all %}
                             <div class="subtask-item">
-                                <div class="subtask-description">{{ subtask.description }}
+                                <div class="subtask-description">
+                                    {{ subtask.description }}
                                     {% if subtask.is_completed %}
                                         <span class="small text-muted">{{ subtask.completed_date|date:"d.m.Y H:i" }}</span>
                                     {% endif %}

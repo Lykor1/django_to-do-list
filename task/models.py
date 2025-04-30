@@ -81,7 +81,7 @@ class SubTask(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        ordering = ('-create_date', 'task')
+        ordering = ('create_date',)
         verbose_name = 'Позадача'
         verbose_name_plural = 'Подзадачи'
         default_related_name = 'subtasks'
