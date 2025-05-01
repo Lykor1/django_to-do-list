@@ -14,8 +14,23 @@ def api_change_task_status(request, task_id):
         current_index = status_order.index(task.status)
         next_index = (current_index + 1) % len(status_order)
         task.status = status_order[next_index]
+
+        subtask_updates = []
+        if task.status == Task.Status.COMPLETED:
+            subtasks = task.subtasks.filter(is_completed=False)
+            for subtask in subtasks:
+                subtask.is_completed = True
+                subtask.completed_date = now()
+                subtask.save()
+                subtask_updates.append({
+                    'id': subtask.id,
+                    'is_completed': subtask.is_completed,
+                    'completed_date': subtask.completed_date.strftime(
+                        '%d.%m.%Y %H:%M') if subtask.completed_date else None
+                })
+
         task.save()
-        return JsonResponse({'status': 'success', 'new_status': task.status})
+        return JsonResponse({'status': 'success', 'new_status': task.status, 'subtask_updates': subtask_updates})
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
 
 
