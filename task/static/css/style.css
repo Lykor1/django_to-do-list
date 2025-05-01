@@ -410,7 +410,7 @@ header .container {
 }
 
 .text-muted {
-    color: #6c757d !important;
+    color: #5508bf !important;
     font-size: 0.8rem;
 }
 
@@ -665,4 +665,22 @@ header .container {
 /* Центрируем текст, когда задач нет */
 .container .text-center {
     text-align: center;
+}
+
+/* Стили для интерактивных квадратиков */
+.task-status-indicator,
+.subtask-status-indicator {
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.task-status-indicator:hover,
+.subtask-status-indicator:hover {
+    transform: scale(1.1);
+    background-color: rgba(85, 8, 191, 0.1);
+}
+
+.task-status-indicator:active,
+.subtask-status-indicator:active {
+    transform: scale(0.95);
 }

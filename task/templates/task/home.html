@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
 
 {% block title %}
     Домашняя страница
@@ -11,7 +13,10 @@
                 <div class="task-card task-status-{{ task.status|lower }}">
                     <div class="task-header">
                         <h2 class="task-title">{{ task.title }}</h2>
-                        <div class="task-status-indicator status-{{ task.status|lower }}">
+                        <div class="task-status-indicator status-{{ task.status|lower }}"
+                             data-task-id="{{ task.id }}"
+                             data-url="{% url 'task:api_change_task_status' task.id %}"
+                             title="Изменить статус">
                             {% if task.status == 'completed' %}
                                 <span class="checkmark">&#10004;</span>
                             {% endif %}
@@ -31,9 +36,12 @@
                                         <span class="small text-muted">{{ subtask.completed_date|date:"d.m.Y H:i" }}</span>
                                     {% endif %}
                                 </div>
-                                <div class="subtask-status-indicator subtask-status-{{ subtask.is_completed|yesno:'completed, not_completed' }}">
+                                <div class="subtask-status-indicator subtask-status-{{ subtask.is_completed|yesno:'completed,not_completed' }}"
+                                     data-subtask-id="{{ subtask.id }}"
+                                     data-url="{% url 'task:api_change_subtask_status' subtask.id %}"
+                                     title="Изменить статус">
                                     {% if subtask.is_completed %}
-                                        <span class="checkamark">&#10004;</span>
+                                        <span class="checkmark">&#10004;</span>
                                     {% endif %}
                                 </div>
                             </div>
@@ -50,4 +58,7 @@
             <p class="text-center">Авторизуйтесь, чтобы увидеть задачи.</p>
         {% endif %}
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/status_update.js' %}"></script>
 {% endblock %}
