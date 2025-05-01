@@ -58,7 +58,8 @@
             <p class="text-center">Авторизуйтесь, чтобы увидеть задачи.</p>
         {% endif %}
     </div>
+{% endblock %}
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% block extra_js %}
     <script src="{% static 'js/status_update.js' %}"></script>
 {% endblock %}

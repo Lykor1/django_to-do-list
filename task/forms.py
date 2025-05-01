@@ -62,4 +62,4 @@ class SubTaskCreateForm(forms.ModelForm):
 
 SubTaskCreateFormSet = forms.inlineformset_factory(Task, SubTask, form=SubTaskCreateForm,
                                                    fields=('description', 'is_completed'),
-                                                   extra=3, can_delete=False)
+                                                   extra=1, can_delete=False)

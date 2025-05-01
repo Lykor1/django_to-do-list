@@ -782,3 +782,43 @@ textarea:focus {
     color: #5508bf; /* Убеждаемся, что текст лейбла фиолетовый */
     /* Возможно, потребуется настроить вертикальное выравнивание, если есть такая необходимость */
 }
+
+/* Добавьте эти стили в ваш style.css */
+
+/* Стили для кнопки "Добавить подзадачу" */
+.btn-add-subtask {
+    /* Наследует базовые стили от класса .btn (если оставлен) */
+    display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    /* text-transform: uppercase; /* Возможно, для этой кнопки не нужно */
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 4px; /* Закругление углов */
+
+    /* Настройка размера */
+    padding: 0.4rem 1rem; /* Уменьшенный padding (можете настроить) */
+    font-size: 0.875rem; /* Меньший размер шрифта (можете настроить) */
+
+    /* Стилистика сайта */
+    background-color: #5508bf; /* Основной фиолетовый фон */
+    color: white; /* Белый текст */
+    border: 2px solid #5508bf; /* Фиолетовая рамка */
+}
+
+.btn-add-subtask:hover {
+    background-color: #300472; /* Более темный фиолетовый при наведении */
+    color: white;
+    text-decoration: none;
+    border-color: #300472; /* Цвет рамки при наведении */
+}
+
+.btn-add-subtask:focus {
+    /* Стили для состояния фокуса, как у других полей/кнопок */
+    outline: none;
+    border-color: #300472;
+    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4);
+}
