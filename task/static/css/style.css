@@ -52,6 +52,7 @@ header .container {
 .header-left {
     display: flex;
     align-items: center;
+    gap: 1.5rem;
     /*margin-right: auto;*/
 }
 
@@ -275,10 +276,14 @@ header .container {
     transition: all 0.3s ease;
 }
 
-.form-field input:focus {
-    outline: none;
-    border-color: #300472;
-    box-shadow: 0 0 0 3px rgba(85, 8, 191, 0.2);
+.form-field input:focus,
+.form-control:focus, /* Добавляем общий класс Bootstrap для всех полей */
+select:focus,
+textarea:focus {
+    outline: none; /* Убираем стандартный outline браузера */
+    border-color: #300472; /* Более темный фиолетовый для рамки в фокусе */
+    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4); /* Фиолетовое свечение */
+    /* Bootstrap 5 использует 0.25rem для box-shadow, сохраняем для консистентности */
 }
 
 .form-buttons {
@@ -683,4 +688,97 @@ header .container {
 .task-status-indicator:active,
 .subtask-status-indicator:active {
     transform: scale(0.95);
+}
+
+/* Добавьте эти стили в ваш style.css */
+
+.task-form-container {
+    max-width: 700px; /* Ограничьте максимальную ширину формы */
+    margin: 2rem auto; /* Центрируйте форму по горизонтали */
+    padding: 2rem;
+    border: 2px solid #5508bf; /* Фиолетовая рамка */
+    border-radius: 8px;
+    background-color: white;
+    text-align: left; /* Выравнивание текста внутри формы по левому краю */
+}
+
+.form-section {
+    margin-bottom: 2rem; /* Отступ между секциями формы */
+}
+
+.form-section h2 {
+    color: #5508bf;
+    margin-bottom: 1.5rem;
+    text-align: center; /* Заголовки секций по центру */
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between; /* Располагает кнопки по краям контейнера */
+    gap: 1rem; /* Отступ между кнопками */
+}
+
+/* Стили для полей формы, если нужно дополнительно настроить */
+.form-control {
+    /* Ваши существующие стили form-control из style.css */
+}
+
+/* Выравнивание чекбокса подзадачи */
+.subtask-form-row .col-md-2 {
+    display: flex;
+    align-items: center; /* Выравнивание элементов по центру вертикали */
+    justify-content: center; /* Выравнивание чекбокса по центру горизонтали в колонке */
+}
+
+/* Стили для кнопки "Добавить задачу" в хедере */
+.btn-add-task {
+    background-color: #5508bf; /* Фиолетовый фон */
+    color: white; /* Белый текст */
+    border: 2px solid #5508bf; /* Фиолетовая рамка */
+    /* Используем базовые стили .btn */
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-add-task:hover {
+    background-color: #300472; /* Более темный фиолетовый при наведении */
+    color: white;
+    text-decoration: none;
+    border-color: #300472; /* Цвет рамки при наведении */
+}
+
+/* Стилизация стандартных чекбоксов Bootstrap */
+.form-check-input {
+    border-color: #5508bf; /* Фиолетовая рамка для невыбранного чекбокса */
+    /* Убедитесь, что фон по умолчанию белый или прозрачный */
+}
+
+.form-check-input:checked {
+    background-color: #5508bf; /* Фиолетовый фон при выборе */
+    border-color: #5508bf; /* Фиолетовая рамка при выборе */
+    /* Переопределяем стандартную синюю галочку Bootstrap на белую */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e"); /* Белая галочка в SVG формате */
+}
+
+/* Стилизация чекбокса в фокусе */
+.form-check-input:focus {
+    border-color: #300472; /* Более темная фиолетовая рамка в фокусе */
+    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4); /* Фиолетовое свечение при фокусе */
+    outline: none; /* Убираем стандартный outline браузера */
+}
+
+/* Опционально: стилизация текста рядом с чекбоксом (лейбл) */
+.form-check-label {
+    color: #5508bf; /* Убеждаемся, что текст лейбла фиолетовый */
+    /* Возможно, потребуется настроить вертикальное выравнивание, если есть такая необходимость */
 }

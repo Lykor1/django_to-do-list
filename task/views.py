@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
 
 from .models import Task, SubTask, Category
+from .forms import TaskCreateForm, SubTaskCreateFormSet
 
 
 @login_required
@@ -60,3 +62,29 @@ def home(request):
         'tasks': tasks,
     }
     return render(request, 'task/home.html', context)
+
+
+@login_required
+def task_create(request):
+    if request.method == 'POST':
+        form = TaskCreateForm(request.POST)
+        formset = SubTaskCreateFormSet(request.POST)
+        if form.is_valid() and formset.is_valid():
+            task = form.save(commit=False, user=request.user)
+            task.save()
+            for subtask_form in formset:
+                if subtask_form.cleaned_data.get('description'):
+                    subtask = subtask_form.save(commit=False, task=task)
+                    subtask.save()
+            messages.success(request, 'Задача успешно добавлена')
+            return redirect('task:home')
+        else:
+            messages.error(request, 'Ошибка в форме')
+    else:
+        form = TaskCreateForm()
+        formset = SubTaskCreateFormSet()
+    context = {
+        'form': form,
+        'formset': formset,
+    }
+    return render(request, 'task/create_task.html', context)

@@ -19,6 +19,9 @@
         <!-- Левая часть -->
         <div class="header-left">
             <a href="{% url 'task:home' %}" class="logo">Список задач</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'task:task_create' %}" class="btn btn-add-task">Добавить задачу</a>
+            {% endif %}
         </div>
         <!-- Правая часть -->
         <div class="header-right">
