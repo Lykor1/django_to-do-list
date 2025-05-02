@@ -50,6 +50,10 @@
                             {% endif %}
                         {% endfor %}
                     </div>
+                    <div class="task-actions mt-3">
+                        <a href="{% url 'task:task_edit' task.id %}" class="btn btn-add-task btn-sm">Редактировать</a>
+                        <a href="#" class="btn btn-cancel btn-sm">Удалить</a>
+                    </div>
                 </div>
             {% empty %}
                 <p class="text-center">Задач пока нет.</p>

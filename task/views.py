@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView
 from django.utils.timezone import now
 
 from .models import Task, SubTask, Category
@@ -88,3 +91,35 @@ def task_create(request):
         'formset': formset,
     }
     return render(request, 'task/create_task.html', context)
+
+
+class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Task
+    form_class = TaskCreateForm
+    template_name = 'task/task_edit.html'
+    success_url = reverse_lazy('task:home')
+
+    def test_func(self):
+        task = self.get_object()
+        return self.request.user == task.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.POST:
+            context['subtask_formset'] = SubTaskCreateFormSet(self.request.POST, instance=self.object)
+        else:
+            context['subtask_formset'] = SubTaskCreateFormSet(instance=self.object)
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        subtask_formset = context['subtask_formset']
+        if subtask_formset.is_valid():
+            self.object = form.save(commit=False, user=self.request.user)
+            self.object.save()
+            subtask_formset.instance = self.object
+            subtask_formset.save()
+            messages.success(self.request, f"Задача '{form.cleaned_data['title']} успешно обновлена!'")
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)

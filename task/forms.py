@@ -54,7 +54,7 @@ class SubTaskCreateForm(forms.ModelForm):
         if instance.is_completed and not instance.completed_date:
             instance.completed_date = now()
         elif not instance.is_completed:
-            instance.completed_date = now()
+            instance.completed_date = None
         if commit:
             instance.save()
         return instance
@@ -62,4 +62,4 @@ class SubTaskCreateForm(forms.ModelForm):
 
 SubTaskCreateFormSet = forms.inlineformset_factory(Task, SubTask, form=SubTaskCreateForm,
                                                    fields=('description', 'is_completed'),
-                                                   extra=1, can_delete=False)
+                                                   extra=1, can_delete=True)
