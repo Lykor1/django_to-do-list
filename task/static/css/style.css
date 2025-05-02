@@ -824,6 +824,65 @@ textarea:focus {
 }
 
 .btn-sm {
-    padding: 0.3rem 0.8rem;!important;
-    font-size: 0.8rem;!important;
+    padding: 0.3rem 0.8rem;
+!important;
+    font-size: 0.8rem;
+!important;
+}
+
+/* Стили для модального окна */
+.modal-content {
+    border: 2px solid #5508bf; /* Фиолетовая рамка */
+    border-radius: 8px;
+    background-color: white;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.modal-header {
+    border-bottom: 1px solid #5508bf; /* Фиолетовая линия */
+    background-color: #f0f0f0; /* Светло-серый фон */
+}
+
+.modal-title {
+    color: #5508bf; /* Фиолетовый заголовок */
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.modal-body {
+    color: #5508bf; /* Фиолетовый текст */
+    text-align: center;
+}
+
+.modal-footer {
+    border-top: 1px solid #5508bf; /* Фиолетовая линия */
+    display: flex;
+    justify-content: space-between; /* Кнопки по краям */
+}
+
+.modal-footer .btn-cancel {
+    background-color: white;
+    color: #ff0000;
+    border: 2px solid #ff0000;
+}
+
+.modal-footer .btn-cancel:hover {
+    background-color: #ff0000;
+    color: white;
+}
+
+.modal-footer .btn-login {
+    background-color: #5508bf;
+    color: white;
+    border: 2px solid #5508bf;
+}
+
+.modal-footer .btn-login:hover {
+    background-color: #300472;
+    color: white;
+    border-color: #300472;
+}
+
+.btn-close {
+    filter: invert(37%) sepia(93%) saturate(686%) hue-rotate(226deg) brightness(44%) contrast(97%); /* Фиолетовый крестик */
 }

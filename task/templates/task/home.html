@@ -52,12 +52,41 @@
                     </div>
                     <div class="task-actions mt-3">
                         <a href="{% url 'task:task_edit' task.id %}" class="btn btn-add-task btn-sm">Редактировать</a>
-                        <a href="#" class="btn btn-cancel btn-sm">Удалить</a>
+                        <button type="button" class="btn btn-cancel btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#deleteTaskModal" data-task-id="{{ task.id }}"
+                                data-task-title="{{ task.title }}">
+                            Удалить
+                        </button>
                     </div>
                 </div>
             {% empty %}
                 <p class="text-center">Задач пока нет.</p>
             {% endfor %}
+
+            <!-- Модальное окно для подтверждения удаления -->
+            <div class="modal fade" id="deleteTaskModal" tabindex="-1" aria-labelledby="deleteTaskModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteTaskModalLabel">Подтверждение удаления</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body">
+                            Вы уверены, что хотите удалить задачу "<span id="task-title"></span>"?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-login" data-bs-dismiss="modal">Отмена</button>
+                            <form id="delete-task-form" method="post" action="">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-cancel">Удалить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         {% else %}
             <p class="text-center">Авторизуйтесь, чтобы увидеть задачи.</p>
         {% endif %}
@@ -66,4 +95,5 @@
 
 {% block extra_js %}
     <script src="{% static 'js/status_update.js' %}"></script>
+    <script src="{% static 'js/delete_task.js' %}"></script>
 {% endblock %}

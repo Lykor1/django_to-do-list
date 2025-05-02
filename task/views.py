@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, DeleteView
 from django.utils.timezone import now
 
 from .models import Task, SubTask, Category
@@ -123,3 +123,12 @@ class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return super().form_valid(form)
         else:
             return self.form_invalid(form)
+
+
+class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Task
+    success_url = reverse_lazy('task:home')
+
+    def test_func(self):
+        task = self.get_object()
+        return self.request.user == task.user
