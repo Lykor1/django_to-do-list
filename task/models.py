@@ -31,7 +31,6 @@ class Task(models.Model):
         COMPLETED = 'completed', 'Выполнена'
 
     title = models.CharField(max_length=100, verbose_name='Название задачи')
-    slug = models.SlugField(max_length=100, unique=True, db_index=True, allow_unicode=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', related_name='tasks')
     category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='Категория', related_name='tasks')
     status = models.CharField(max_length=10, choices=Status.choices, default=Status.NOT_ACTIVE,
@@ -42,18 +41,13 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title, allow_unicode=True)
-        super().save(*args, **kwargs)
-
     @property
     def is_overdue(self):
         from django.utils.timezone import now
         return self.due_date < now() if self.due_date else False
 
     class Meta:
-        ordering = ('create_date',)
+        ordering = ('-create_date',)
         verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'
         constraints = [

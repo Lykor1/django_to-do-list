@@ -29,13 +29,12 @@ class TaskAdmin(admin.ModelAdmin):
     search_fields = ('title', 'user__username', 'category__name')
     list_editable = ('status',)
     date_hierarchy = 'create_date'
-    prepopulated_fields = {'slug': ('title',)}
     readonly_fields = ('create_date',)
     autocomplete_fields = ('user',)
     inlines = [SubTaskInline]
     fieldsets = (
         ('Основное', {
-            'fields': ('title', 'slug', 'user', 'category', 'status')
+            'fields': ('title', 'user', 'category', 'status')
         }),
         ('Даты', {
             'fields': ('create_date', 'due_date'),
