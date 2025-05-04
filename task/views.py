@@ -8,7 +8,44 @@ from django.views.generic import UpdateView, DeleteView
 from django.utils.timezone import now
 
 from .models import Task, SubTask, Category
-from .forms import TaskCreateForm, SubTaskCreateFormSet
+from .forms import TaskCreateForm, SubTaskCreateFormSet, TaskFilterForm
+
+
+def home(request):
+    if request.user.is_authenticated:
+        tasks = Task.objects.filter(user=request.user).prefetch_related('subtasks')
+        # if 'category' in request.GET:
+        #     category = request.GET['category']
+        #     tasks = tasks.filter(category__id=category)
+        # else:
+        #     category = ''
+        # if 'status' in request.GET:
+        #     status = request.GET['status']
+        #     tasks = tasks.filter(status=status)
+        # else:
+        #     status = ''
+        # filter_form = TaskFilterForm(initial={'category': category, 'status': status})
+
+        category = request.GET.get('category')
+        if category and category != '':
+            tasks = tasks.filter(category__slug=category)
+        status = request.GET.get('status')
+        if status and status != '':
+            tasks = tasks.filter(status=status)
+        initial = {}
+        if category:
+            initial['category'] = category
+        if status:
+            initial['status'] = status
+        filter_form = TaskFilterForm(initial=initial)
+    else:
+        tasks = None
+        filter_form = None
+    context = {
+        'tasks': tasks,
+        'filter_form': filter_form,
+    }
+    return render(request, 'task/home.html', context)
 
 
 @login_required
@@ -54,17 +91,6 @@ def api_change_subtask_status(request, subtask_id):
                              'completed_date': subtask.completed_date.strftime(
                                  '%d.%m.%Y %H:%M') if subtask.completed_date else None})
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
-
-
-def home(request):
-    if request.user.is_authenticated:
-        tasks = Task.objects.filter(user=request.user).prefetch_related('subtasks')
-    else:
-        tasks = None
-    context = {
-        'tasks': tasks,
-    }
-    return render(request, 'task/home.html', context)
 
 
 @login_required

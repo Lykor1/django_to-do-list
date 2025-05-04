@@ -886,3 +886,73 @@ textarea:focus {
 .btn-close {
     filter: invert(37%) sepia(93%) saturate(686%) hue-rotate(226deg) brightness(44%) contrast(97%); /* Фиолетовый крестик */
 }
+
+
+/* Стили для контейнера фильтров */
+.filter-container {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+    flex-grow: 1;
+}
+
+.filter-form {
+    width: 100%;
+}
+
+.filter-fields {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.filter-field {
+    flex: 1;
+    max-width: 200px;
+}
+
+.filter-select {
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid #5508bf;
+    color: #5508bf;
+    padding: 0.5rem 1rem;
+    height: auto;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%235508bf' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+}
+
+.filter-select:focus {
+    border-color: #300472;
+    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4);
+    outline: none;
+}
+
+/* Кнопка сброса фильтров */
+.btn-reset {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    background-color: white;
+    color: #5508bf;
+    border: 2px solid #5508bf;
+}
+
+.btn-reset:hover {
+    background-color: #f0f0f0;
+    color: #300472;
+    text-decoration: none;
+    border-color: #300472;
+}

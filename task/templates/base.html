@@ -20,7 +20,45 @@
         <div class="header-left">
             <a href="{% url 'task:home' %}" class="logo">Список задач</a>
             {% if user.is_authenticated %}
-                <a href="{% url 'task:task_create' %}" class="btn btn-add-task">Добавить задачу</a>
+                <a href="{% url 'task:task_create' %}{{ all }}" class="btn btn-add-task">Добавить задачу</a>
+                <!-- Фильтры -->
+                <div class="filter-container">
+                    <form method="get" action="{% url 'task:home' %}" class="filter-form">
+                        <div class="filter-fields">
+                            <!-- Поле категории -->
+                            <div class="filter-field">
+                                <select name="category" class="form-control filter-select"
+                                        onchange="this.form.submit()">
+                                    <option value="">Все категории</option>
+                                    {% for category in categories %}
+                                        <option value="{{ category.slug }}"
+                                                {% if request.GET.category == category.slug %}selected{% endif %}>
+                                            {{ category.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <!-- Поле статуса -->
+                            <div class="filter-field">
+                                <select name="status" class="form-control filter-select" onchange="this.form.submit()">
+                                    <option value="">Все статусы</option>
+                                    {% for status_key, status_name in statuses %}
+                                        <option value="{{ status_key }}"
+                                                {% if request.GET.status == status_key %}selected{% endif %}>
+                                            {{ status_name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <!-- Кнопка сброса фильтров -->
+                            <div class="filter-field">
+                                <a href="{% url 'task:home' %}" class="btn btn-reset">Сбросить</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             {% endif %}
         </div>
         <!-- Правая часть -->

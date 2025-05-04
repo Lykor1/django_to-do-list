@@ -63,3 +63,17 @@ class SubTaskCreateForm(forms.ModelForm):
 SubTaskCreateFormSet = forms.inlineformset_factory(Task, SubTask, form=SubTaskCreateForm,
                                                    fields=('description', 'is_completed'),
                                                    extra=1, can_delete=True)
+
+
+class TaskFilterForm(forms.Form):
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        to_field_name='slug'
+    )
+    status = forms.ChoiceField(
+        choices=Task.Status.choices,
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
