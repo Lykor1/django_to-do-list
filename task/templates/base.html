@@ -35,7 +35,7 @@
                         {% endwith %}
                     </button>
                     <div class="dropdown-content filter-dropdown-content">
-                        <a href="{% url_replace_param category=None %}">Все категории</a>
+                        <a href="{% url_replace_param category=None %}">Все</a>
                         {% for category_item in categories %}
                             <a href="{% url_replace_param category=category_item.slug %}">
                                 {{ category_item.name }}
@@ -57,7 +57,7 @@
                         {% endwith %}
                     </button>
                     <div class="dropdown-content filter-dropdown-content">
-                        <a href="{% url_replace_param status=None %}">Все статусы</a>
+                        <a href="{% url_replace_param status=None %}">Все</a>
                         {% for status_key, status_name in statuses %}
                             <a href="{% url_replace_param status=status_key %}">
                                 {{ status_name }}
@@ -73,7 +73,7 @@
                 <div class="dropdown">
                     <button class="btn btn-dropdown">{{ user.username }}</button>
                     <div class="dropdown-content">
-                        <a href="{% url 'account:profile' %}">Профиль</a>
+                        <a href="{% url 'account:profile' %}{{ all }}">Профиль</a>
                         <form method="post" action="{% url 'account:logout' %}">
                             {% csrf_token %}
                             <button type="submit" class="dropdown-item">Выйти</button>

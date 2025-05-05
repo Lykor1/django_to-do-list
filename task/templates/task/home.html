@@ -51,7 +51,7 @@
                         {% endfor %}
                     </div>
                     <div class="task-actions mt-3">
-                        <a href="{% url 'task:task_edit' task.id %}" class="btn btn-add-task btn-sm">Редактировать</a>
+                        <a href="{% url 'task:task_edit' task.id %}{{ all }}" class="btn btn-add-task btn-sm">Редактировать</a>
                         <button type="button" class="btn btn-cancel btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#deleteTaskModal" data-task-id="{{ task.id }}"
                                 data-task-title="{{ task.title }}">
