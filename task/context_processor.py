@@ -9,20 +9,6 @@ def task_context_processor(request):
         'status': '',
         'all': ''
     }
-    # if 'category' in request.GET:
-    #     category = request.GET['category']
-    #     if category:
-    #         context['category'] = f'category={category}'
-    #         context['all'] = f"?{context['category']}"
-    # if 'status' in request.GET:
-    #     status = request.GET['status']
-    #     if status:
-    #         if context['all']:
-    #             context['status'] = f'status={status}'
-    #             context['all'] += f"&{context['status']}"
-    #         else:
-    #             context['status'] = f'status={status}'
-    #             context['all'] = f"?{context['status']}"
 
     query_params = []
     if 'category' in request.GET:

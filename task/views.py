@@ -14,18 +14,6 @@ from .forms import TaskCreateForm, SubTaskCreateFormSet, TaskFilterForm
 def home(request):
     if request.user.is_authenticated:
         tasks = Task.objects.filter(user=request.user).prefetch_related('subtasks')
-        # if 'category' in request.GET:
-        #     category = request.GET['category']
-        #     tasks = tasks.filter(category__id=category)
-        # else:
-        #     category = ''
-        # if 'status' in request.GET:
-        #     status = request.GET['status']
-        #     tasks = tasks.filter(status=status)
-        # else:
-        #     status = ''
-        # filter_form = TaskFilterForm(initial={'category': category, 'status': status})
-
         category = request.GET.get('category')
         if category and category != '':
             tasks = tasks.filter(category__slug=category)

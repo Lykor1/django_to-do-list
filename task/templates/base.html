@@ -21,43 +21,48 @@
             <a href="{% url 'task:home' %}" class="logo">Список задач</a>
             {% if user.is_authenticated %}
                 <a href="{% url 'task:task_create' %}{{ all }}" class="btn btn-add-task">Добавить задачу</a>
-                <!-- Фильтры -->
-                <div class="filter-container">
-                    <form method="get" action="{% url 'task:home' %}" class="filter-form">
-                        <div class="filter-fields">
-                            <!-- Поле категории -->
-                            <div class="filter-field">
-                                <select name="category" class="form-control filter-select"
-                                        onchange="this.form.submit()">
-                                    <option value="">Все категории</option>
-                                    {% for category in categories %}
-                                        <option value="{{ category.slug }}"
-                                                {% if request.GET.category == category.slug %}selected{% endif %}>
-                                            {{ category.name }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+                <div class="dropdown filter-dropdown">
+                    <button class="btn btn-dropdown">
+                        {% with current_category_slug=request.GET.category %}
+                            {% if current_category_slug %}
+                                {% for cat in categories %}
+                                    {% if cat.slug == current_category_slug %}{{ cat.name }}{% endif %}
+                                {% endfor %}
+                            {% else %}
+                                Категория
+                            {% endif %}
+                        {% endwith %}
+                    </button>
+                    <div class="dropdown-content filter-dropdown-content">
+                        <a href="{% url 'task:home' %}{% if status %}?{{ status }}{% endif %}">Все категории</a>
+                        {% for category_item in categories %}
+                            <a href="{% url 'task:home' %}?category={{ category_item.slug }}{% if status %}&{{ status }}{% endif %}">
+                                {{ category_item.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
 
-                            <!-- Поле статуса -->
-                            <div class="filter-field">
-                                <select name="status" class="form-control filter-select" onchange="this.form.submit()">
-                                    <option value="">Все статусы</option>
-                                    {% for status_key, status_name in statuses %}
-                                        <option value="{{ status_key }}"
-                                                {% if request.GET.status == status_key %}selected{% endif %}>
-                                            {{ status_name }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-
-                            <!-- Кнопка сброса фильтров -->
-                            <div class="filter-field">
-                                <a href="{% url 'task:home' %}" class="btn btn-reset">Сбросить</a>
-                            </div>
-                        </div>
-                    </form>
+                <div class="dropdown filter-dropdown">
+                    <button class="btn btn-dropdown">
+                        {% with current_status_key=request.GET.status %}
+                            {% if current_status_key %}
+                                {% for status_key, status_name in statuses %}
+                                    {% if status_key == current_status_key %}{{ status_name }}{% endif %}
+                                {% endfor %}
+                            {% else %}
+                                Статус
+                            {% endif %}
+                        {% endwith %}
+                    </button>
+                    <div class="dropdown-content filter-dropdown-content">
+                        <a href="{% url 'task:home' %}{% if category %}?{{ category }}{% endif %}">Все статусы</a>
+                        {% for status_key, status_name in statuses %}
+                            <a href="{% url 'task:home' %}?status={{ status_key }}{% if category %}&{{ category }}{% endif %}">
+                                {{ status_name }}
+                            </a>
+                        {% endfor %}
+                    </div>
                 </div>
             {% endif %}
         </div>
