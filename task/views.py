@@ -3,9 +3,10 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import UpdateView, DeleteView
 from django.utils.timezone import now
+from urllib.parse import urlencode
 
 from .models import Task, SubTask, Category
 from .forms import TaskCreateForm, SubTaskCreateFormSet, TaskFilterForm
@@ -107,11 +108,22 @@ def task_create(request):
     return render(request, 'task/create_task.html', context)
 
 
-class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class RedirectToFilteredListMixin:
+    def get_success_url(self):
+        current_filters = self.request.GET.copy()
+        home_url = reverse('task:home')
+        encoded_filters = urlencode(current_filters)
+        if encoded_filters:
+            redirect_url = f'{home_url}?{encoded_filters}'
+        else:
+            redirect_url = home_url
+        return redirect_url
+
+
+class TaskUpdateView(RedirectToFilteredListMixin, LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Task
     form_class = TaskCreateForm
     template_name = 'task/task_edit.html'
-    success_url = reverse_lazy('task:home')
 
     def test_func(self):
         task = self.get_object()
@@ -139,10 +151,14 @@ class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return self.form_invalid(form)
 
 
-class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class TaskDeleteView(RedirectToFilteredListMixin, LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Task
-    success_url = reverse_lazy('task:home')
 
     def test_func(self):
         task = self.get_object()
         return self.request.user == task.user
+
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
+        messages.success(self.request, 'Задача была удалена')
+        return response
