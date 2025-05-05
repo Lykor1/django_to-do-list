@@ -945,16 +945,15 @@ textarea:focus {
     cursor: pointer;
     text-decoration: none;
     text-align: center;
-    background-color: white;
-    color: #5508bf;
-    border: 2px solid #5508bf;
+    background-color: #5508bf;
+    color: white;
+    border: none;
 }
 
 .btn-reset:hover {
-    background-color: #f0f0f0;
-    color: #300472;
+    background-color: #300472;
+    color: #f0f0f0;
     text-decoration: none;
-    border-color: #300472;
 }
 
 

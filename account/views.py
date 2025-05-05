@@ -91,17 +91,6 @@ def profile_edit(request):
         form = ProfileEditForm(instance=request.user)
     return render(request, 'account/profile_edit.html', {'form': form})
 
-
-# @login_required
-# def profile_delete(request):
-#     if request.method == 'POST':
-#         user = request.user
-#         user.delete()
-#         logout(request)
-#         messages.success(request, 'Ваш профиль был удалён.')
-#         return redirect(reverse_lazy('task:home'))
-#     return redirect('account:profile')
-
 @login_required
 def profile_delete(request):
     if request.method == 'POST':
