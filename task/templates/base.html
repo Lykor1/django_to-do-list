@@ -2,6 +2,7 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% load static %}
+{% load filter_tags %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -34,9 +35,9 @@
                         {% endwith %}
                     </button>
                     <div class="dropdown-content filter-dropdown-content">
-                        <a href="{% url 'task:home' %}{% if status %}?{{ status }}{% endif %}">Все категории</a>
+                        <a href="{% url_replace_param category=None %}">Все категории</a>
                         {% for category_item in categories %}
-                            <a href="{% url 'task:home' %}?category={{ category_item.slug }}{% if status %}&{{ status }}{% endif %}">
+                            <a href="{% url_replace_param category=category_item.slug %}">
                                 {{ category_item.name }}
                             </a>
                         {% endfor %}
@@ -56,9 +57,9 @@
                         {% endwith %}
                     </button>
                     <div class="dropdown-content filter-dropdown-content">
-                        <a href="{% url 'task:home' %}{% if category %}?{{ category }}{% endif %}">Все статусы</a>
+                        <a href="{% url_replace_param status=None %}">Все статусы</a>
                         {% for status_key, status_name in statuses %}
-                            <a href="{% url 'task:home' %}?status={{ status_key }}{% if category %}&{{ category }}{% endif %}">
+                            <a href="{% url_replace_param status=status_key %}">
                                 {{ status_name }}
                             </a>
                         {% endfor %}
