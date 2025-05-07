@@ -33,7 +33,7 @@
                                 <div class="subtask-description">
                                     {{ subtask.description }}
                                     {% if subtask.is_completed %}
-                                        <span class="small text-muted">{{ subtask.completed_date|date:"d.m.Y H:i" }}</span>
+                                        <p class="small text-muted mb-0">{{ subtask.completed_date|date:"d.m.Y H:i" }}</p>
                                     {% endif %}
                                 </div>
                                 <div class="subtask-status-indicator subtask-status-{{ subtask.is_completed|yesno:'completed,not_completed' }}"
@@ -51,7 +51,8 @@
                         {% endfor %}
                     </div>
                     <div class="task-actions mt-3">
-                        <a href="{% url 'task:task_edit' task.id %}{{ all }}" class="btn btn-login btn-sm">Редактировать</a>
+                        <a href="{% url 'task:task_edit' task.id %}{{ all }}"
+                           class="btn btn-login btn-sm">Редактировать</a>
                         <button type="button" class="btn btn-cancel btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#deleteTaskModal" data-task-id="{{ task.id }}"
                                 data-task-title="{{ task.title }}">

@@ -84,14 +84,14 @@ $(document).ready(function () {
                                     const formattedTime = formatMoscowTime(data.completed_date);
                                     $subtaskIndicator.closest('.subtask-item')
                                         .find('.subtask-description')
-                                        .find('.small.text-muted')
+                                        .find('p.small.text-muted')
                                         .remove()
                                         .end()
-                                        .append('<span class="small text-muted">' + formattedTime + '</span>');
+                                        .append('<p class="small text-muted mb-0">' + formattedTime + '</p>');
                                 } else {
                                     $subtaskIndicator.html('');
                                     $subtaskIndicator.closest('.subtask-item')
-                                        .find('.subtask-description .small.text-muted')
+                                        .find('.subtask-description p.small.text-muted')
                                         .remove();
                                 }
                             }
@@ -125,15 +125,15 @@ $(document).ready(function () {
                         const formattedTime = formatMoscowTime(data.completed_date);
                         $indicator.closest('.subtask-item')
                             .find('.subtask-description')
-                            .find('.small.text-muted')
+                            .find('p.small.text-muted')
                             .remove()
                             .end()
-                            .append('<span class="small text-muted">' + formattedTime + '</span>');
+                            .append('<p class="small text-muted mb-0">' + formattedTime + '</p>');
                     } else {
                         $indicator.html('');
                         // Удаляем дату выполнения
                         $indicator.closest('.subtask-item')
-                            .find('.subtask-description .small.text-muted')
+                            .find('.subtask-description p.small.text-muted')
                             .remove();
                     }
                 }
