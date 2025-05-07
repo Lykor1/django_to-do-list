@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.contrib import messages
@@ -15,17 +16,25 @@ from .forms import TaskCreateForm, SubTaskCreateFormSet, TaskFilterForm
 def home(request):
     if request.user.is_authenticated:
         tasks = Task.objects.filter(user=request.user).prefetch_related('subtasks')
+
         category = request.GET.get('category')
         if category and category != '':
             tasks = tasks.filter(category__slug=category)
         status = request.GET.get('status')
         if status and status != '':
             tasks = tasks.filter(status=status)
+        search = request.GET.get('search')
+        if search and search != '':
+            tasks = tasks.filter(Q(title__icontains=search))
+
         initial = {}
         if category:
             initial['category'] = category
         if status:
             initial['status'] = status
+        if search:
+            initial['search'] = search
+
         filter_form = TaskFilterForm(initial=initial)
     else:
         tasks = None

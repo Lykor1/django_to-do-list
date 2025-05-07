@@ -7,6 +7,7 @@ def task_context_processor(request):
         'statuses': Task.Status.choices,
         'category': '',
         'status': '',
+        'search': '',
         'all': ''
     }
 
@@ -21,6 +22,11 @@ def task_context_processor(request):
         if status:
             context['status'] = f'status={status}'
             query_params.append(context['status'])
+    if 'search' in request.GET:
+        search = request.GET['search']
+        if search:
+            context['search'] = f'search={search}'
+            query_params.append(context['search'])
     if query_params:
         context['all'] = f"?{'&'.join(query_params)}"
     return context

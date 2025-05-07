@@ -51,9 +51,9 @@ header .container {
 /* Стили для левой части хэдера */
 .header-left {
     display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    /*margin-right: auto;*/
+    align-items: center; /* Выравниваем элементы по центру */
+    gap: 1.5rem; /* Отступ между элементами */
+    flex-wrap: wrap; /* Разрешаем перенос */
 }
 
 /* Стили для правой части хэдера */
@@ -61,7 +61,6 @@ header .container {
     display: flex;
     align-items: center;
     gap: 1rem; /* Отступ между кнопками */
-    /*margin-left: auto;*/
 }
 
 /* Стили для логотипа */
@@ -81,7 +80,7 @@ header .container {
 
 /* Общие стили для кнопок */
 .btn {
-    display: inline-block;
+    /*display: inline-block;*/
     padding: 0.5rem 1.25rem;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 500;
@@ -94,6 +93,12 @@ header .container {
     text-decoration: none;
     text-align: center;
     border: 2px solid transparent;
+    /* Добавлены стили для выравнивания */
+    display: inline-flex; /* Используем inline-flex для лучшего центрирования содержимого */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    height: 38px; /* Задаем фиксированную высоту */
+    box-sizing: border-box; /* Учитываем border и padding в размере */
 }
 
 /* Кнопка входа */
@@ -141,6 +146,12 @@ header .container {
     transition: all 0.3s ease;
     position: relative; /* Добавляем для z-index */
     z-index: 2; /* Чтобы кнопка была над выпадающим списком при раскрытии */
+    /* Добавлены стили для выравнивания */
+    display: inline-flex; /* Используем inline-flex */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    height: 38px; /* Задаем фиксированную высоту */
+    box-sizing: border-box;
 }
 
 .btn-dropdown:hover {
@@ -161,6 +172,9 @@ header .container {
     overflow: hidden;
     border: 1px solid #5508bf;
     margin-top: 0; /* Убираем отступ сверху */
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .dropdown-content a {
@@ -176,6 +190,7 @@ header .container {
     /*font-size: 0.9rem;*/
     cursor: pointer;
     margin: 0;
+    white-space: nowrap; /* Предотвращаем перенос текста */
 }
 
 .dropdown-content a:hover {
@@ -199,11 +214,6 @@ header .container {
     color: white !important; /* Белый текст при наведении */
 }
 
-.dropdown:hover .dropdown-content,
-.dropdown-content:hover {
-    display: block;
-}
-
 /* Делаем кнопку "Выйти" на всю ширину */
 .dropdown-content form {
     margin: 0;
@@ -212,18 +222,12 @@ header .container {
     width: 100%;
 }
 
-/* Добавляем плавное раскрытие */
-.dropdown-content {
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-    opacity: 0;
-    visibility: hidden;
-}
 
 .dropdown:hover .dropdown-content,
 .dropdown-content:hover {
+    display: block;
     opacity: 1;
     visibility: visible;
-    display: block;
 }
 
 /* Стили для страницы входа */
@@ -283,13 +287,13 @@ textarea:focus {
     outline: none; /* Убираем стандартный outline браузера */
     border-color: #300472; /* Более темный фиолетовый для рамки в фокусе */
     box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4); /* Фиолетовое свечение */
-    /* Bootstrap 5 использует 0.25rem для box-shadow, сохраняем для консистентности */
 }
 
 .form-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
+    gap: 1rem; /* Отступ между кнопками */
 }
 
 .btn-cancel {
@@ -376,6 +380,7 @@ textarea:focus {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
+    gap: 1rem; /* Отступ между кнопками */
 }
 
 /* Дополнительные стили для формы регистрации */
@@ -485,7 +490,6 @@ textarea:focus {
     right: 0;
     z-index: 1050; /* Высокий z-index, чтобы сообщения были поверх всего (выше хедера) */
     padding: 0 15px; /* Добавляем небольшие горизонтальные отступы */
-    /*pointer-events: none; !* Позволяет кликать сквозь этот блок, если в нем нет активных элементов *!*/
 }
 
 .message-area .container-fluid {
@@ -494,7 +498,6 @@ textarea:focus {
     margin: 0 auto; /* Центрируем блок сообщений по горизонтали */
     pointer-events: all; /* Включаем клики внутри контейнера, где находятся сами сообщения */
 }
-
 
 /* Styles for Task Card */
 .task-card {
@@ -558,6 +561,8 @@ textarea:focus {
     font-size: 1.2rem;
     font-weight: bold;
     background-color: white; /* Белый фон для квадратика по умолчанию */
+    cursor: pointer; /* Добавляем курсорpointer */
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Добавляем переходы */
 }
 
 /* Task Status Indicator Colors */
@@ -621,7 +626,6 @@ textarea:focus {
     hyphens: auto;
     overflow-wrap: break-word; /* Перенос длинных слов (современное свойство) */
     word-break: break-word; /* Принудительный разрыв любых слов (или строк без пробелов) */
-
 }
 
 /* Квадратик индикатора статуса подзадачи */
@@ -637,6 +641,8 @@ textarea:focus {
     font-weight: bold;
     background-color: white; /* Белый фон для квадратика по умолчанию */
     flex-shrink: 0; /* Запрещаем элементу сжиматься */
+    cursor: pointer; /* Добавляем курсорpointer */
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Добавляем переходы */
 }
 
 /* Цвета квадратика индикатора статуса подзадачи */
@@ -674,12 +680,6 @@ textarea:focus {
 }
 
 /* Стили для интерактивных квадратиков */
-.task-status-indicator,
-.subtask-status-indicator {
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.3s ease;
-}
-
 .task-status-indicator:hover,
 .subtask-status-indicator:hover {
     transform: scale(1.1);
@@ -691,8 +691,7 @@ textarea:focus {
     transform: scale(0.95);
 }
 
-/* Добавьте эти стили в ваш style.css */
-
+/* Стили для контейнера формы создания/редактирования задачи */
 .task-form-container {
     max-width: 700px; /* Ограничьте максимальную ширину формы */
     margin: 2rem auto; /* Центрируйте форму по горизонтали */
@@ -713,18 +712,37 @@ textarea:focus {
     text-align: center; /* Заголовки секций по центру */
 }
 
+/* Стили для кнопок в форме (Save, Cancel) */
 .form-buttons {
     display: flex;
     justify-content: space-between; /* Располагает кнопки по краям контейнера */
     gap: 1rem; /* Отступ между кнопками */
 }
 
-/* Стили для полей формы, если нужно дополнительно настроить */
+/* Стили для полей формы (input, select, textarea) */
 .form-control {
     /* Ваши существующие стили form-control из style.css */
+    padding: 0.375rem 0.75rem; /* Стандартный padding Bootstrap */
+    font-size: 1rem; /* Стандартный размер шрифта Bootstrap */
+    font-weight: 400;
+    line-height: 1.5; /* Стандартный line-height Bootstrap */
+    color: #5508bf;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #5508bf; /* Фиолетовая рамка */
+    border-radius: 4px;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-/* Выравнивание чекбокса подзадачи */
+/* Стили для полей формы в фокусе */
+.form-control:focus {
+    border-color: #300472; /* Более темный фиолетовый для рамки в фокусе */
+    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4); /* Фиолетовое свечение */
+    outline: none; /* Убираем стандартный outline браузера */
+}
+
+
+/* Выравнивание чекбокса подзадачи (если используется Bootstrap grid) */
 .subtask-form-row .col-md-2 {
     display: flex;
     align-items: center; /* Выравнивание элементов по центру вертикали */
@@ -737,7 +755,11 @@ textarea:focus {
     color: white; /* Белый текст */
     border: none;
     /* Используем базовые стили .btn */
-    display: inline-block;
+    display: inline-flex; /* Используем inline-flex */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    height: 38px; /* Задаем фиксированную высоту */
+    box-sizing: border-box;
     padding: 0.5rem 1.25rem;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 500;
@@ -784,8 +806,6 @@ textarea:focus {
     /* Возможно, потребуется настроить вертикальное выравнивание, если есть такая необходимость */
 }
 
-/* Добавьте эти стили в ваш style.css */
-
 /* Стили для кнопки "Добавить подзадачу" */
 .btn-add-subtask {
     /* Наследует базовые стили от класса .btn (если оставлен) */
@@ -825,10 +845,8 @@ textarea:focus {
 }
 
 .btn-sm {
-    padding: 0.3rem 0.8rem;
-!important;
-    font-size: 0.8rem;
-!important;
+    padding: 0.3rem 0.8rem !important;
+    font-size: 0.8rem !important;
 }
 
 /* Стили для модального окна */
@@ -859,6 +877,7 @@ textarea:focus {
     border-top: 1px solid #5508bf; /* Фиолетовая линия */
     display: flex;
     justify-content: space-between; /* Кнопки по краям */
+    gap: 1rem; /* Отступ между кнопками */
 }
 
 .modal-footer .btn-cancel {
@@ -888,87 +907,40 @@ textarea:focus {
     filter: invert(37%) sepia(93%) saturate(686%) hue-rotate(226deg) brightness(44%) contrast(97%); /* Фиолетовый крестик */
 }
 
-
-/* Стили для контейнера фильтров */
-.filter-container {
-    display: flex;
-    align-items: center;
-    margin-left: 2rem;
-    flex-grow: 1;
-}
-
-.filter-form {
-    width: 100%;
-}
-
-.filter-fields {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.filter-field {
-    flex: 1;
-    max-width: 200px;
-}
-
-.filter-select {
-    cursor: pointer;
-    background-color: white;
-    border: 2px solid #5508bf;
-    color: #5508bf;
-    padding: 0.5rem 1rem;
-    height: auto;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%235508bf' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 16px 12px;
-}
-
-.filter-select:focus {
-    border-color: #300472;
-    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4);
-    outline: none;
-}
-
-/* Кнопка сброса фильтров */
-.btn-reset {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 500;
-    font-size: 0.9rem;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    background-color: #5508bf;
-    color: white;
-    border: none;
-}
-
-.btn-reset:hover {
-    background-color: #300472;
-    color: #f0f0f0;
-    text-decoration: none;
-}
-
-
+/* Стили для выпадающих списков фильтров */
 .filter-dropdown {
     position: relative;
     display: inline-block;
 }
 
+.btn-dropdown {
+    /* Ваши существующие стили btn-dropdown */
+    background-color: #5508bf;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    /* Добавлены стили для выравнивания */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px; /* Задаем фиксированную высоту */
+    box-sizing: border-box;
+}
+
+
 .filter-dropdown-content {
     display: none;
     position: absolute;
-    /* Измените на left: 0; если хотите выравнивание по левому краю кнопки */
-    left: 0;
-    /* right: 0; */
+    left: 0; /* Выравнивание по левому краю кнопки */
     top: 100%;
     background-color: white;
     min-width: 160px;
@@ -1008,4 +980,195 @@ textarea:focus {
     display: block;
     opacity: 1;
     visibility: visible;
+}
+
+/* Кнопка сброса фильтров */
+.btn-reset {
+    /*display: inline-block;*/
+    padding: 0.5rem 1rem;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    background-color: #5508bf;
+    color: white;
+    border: none;
+    /* Добавлены стили для выравнивания */
+    display: inline-flex; /* Используем inline-flex */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    height: 38px; /* Задаем фиксированную высоту */
+    box-sizing: border-box;
+}
+
+.btn-reset:hover {
+    background-color: #300472;
+    color: #f0f0f0;
+    text-decoration: none;
+}
+
+/* Общие стили для кнопок и дропдаунов */
+.btn,
+.btn-dropdown,
+.btn-add-task,
+.btn-reset {
+    /* Ваши существующие стили */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px; /* Фиксированная высота */
+    box-sizing: border-box;
+    padding: 0.5rem 1.25rem;
+    /* Добавим vertical-align */
+    vertical-align: middle;
+}
+
+/* Стили для контейнера формы поиска */
+.search-form-container {
+    display: flex;
+    align-items: center; /* Выравниваем элементы внутри контейнера по центру */
+    border: 2px solid #5508bf;
+    border-radius: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+    height: 38px; /* Та же фиксированная высота */
+    flex-shrink: 0;
+    /* Попробуем выравнивание с помощью margin: auto */
+    margin-top: auto;
+    margin-bottom: auto;
+    /* Уберем или закомментируем vertical-align: middle; здесь, если он был */
+}
+
+.custom-search-input {
+    /* Ваши существующие стили */
+    display: block;
+    width: 100%;
+    padding: 0 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 34px;
+    color: #5508bf;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: none;
+    appearance: none;
+    border-radius: 0;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+    flex-grow: 1;
+    height: 100%;
+    box-sizing: border-box;
+    /* Добавим vertical-align для самого поля ввода */
+    vertical-align: middle;
+}
+
+.custom-search-input:focus {
+    color: #5508bf;
+    background-color: #fff;
+    border-color: transparent;
+    outline: 0;
+    box-shadow: none;
+}
+
+.custom-search-input::placeholder {
+    color: #5508bf;
+    opacity: 0.7;
+}
+
+.custom-search-button {
+    /* Ваши существующие стили */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.75rem;
+    font-size: 1rem;
+    line-height: 34px;
+    color: white;
+    background-color: #5508bf;
+    border: none;
+    border-radius: 0;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    cursor: pointer;
+
+    height: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    /* Добавим vertical-align */
+    vertical-align: middle;
+}
+
+.custom-search-button:hover {
+    color: white;
+    background-color: #300472;
+    border-color: #300472;
+}
+
+.custom-search-button:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4);
+    z-index: 3;
+    border-color: #300472;
+}
+
+/* Стиль для SVG иконки внутри кнопки */
+.custom-search-button svg {
+    fill: white;
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    padding: 0;
+    display: block;
+    align-self: center;
+}
+
+/* При фокусе на контейнере делаем его рамку темнее */
+.search-form-container:focus-within {
+    border-color: #300472;
+    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4);
+}
+
+/* Дополнительные стили для выравнивания всех элементов в header-left */
+.header-left > .btn,
+.header-left > .dropdown,
+.header-left > .search-form-container {
+     vertical-align: middle; /* Применяем vertical-align ко всем прямым потомкам */
+     display: inline-flex; /* Или flex */
+     align-items: center; /* Центрируем содержимое по вертикали */
+     /* Уберем или закомментируем margin-top/bottom: auto; если добавляли */
+     margin-top: 0;
+     margin-bottom: 0;
+}
+
+/* Уточнение для input внутри search-form-container, если нужно */
+.search-form-container .form-control {
+    height: 100%;
+    padding: 0 0.75rem;
+    line-height: 34px;
+    vertical-align: middle; /* Явно задаем vertical-align */
+}
+
+/* Уточнение для кнопок фильтров, чтобы их высота была консистентной */
+.btn-dropdown {
+    box-sizing: border-box;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle; /* Явно задаем vertical-align */
+}
+
+/* Уточнение для кнопки сброса */
+.btn-reset {
+     box-sizing: border-box;
+     height: 38px;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     vertical-align: middle; /* Явно задаем vertical-align */
 }
