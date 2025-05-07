@@ -65,8 +65,7 @@ def api_change_task_status(request, task_id):
                 subtask_updates.append({
                     'id': subtask.id,
                     'is_completed': subtask.is_completed,
-                    'completed_date': subtask.completed_date.strftime(
-                        '%d.%m.%Y %H:%M') if subtask.completed_date else None
+                    'completed_date': subtask.completed_date.isoformat() if subtask.completed_date else None
                 })
 
         task.save()
@@ -86,8 +85,8 @@ def api_change_subtask_status(request, subtask_id):
         subtask.save()
         return JsonResponse({'status': 'success',
                              'is_completed': subtask.is_completed,
-                             'completed_date': subtask.completed_date.strftime(
-                                 '%d.%m.%Y %H:%M') if subtask.completed_date else None})
+                             'completed_date': subtask.completed_date.isoformat() if subtask.completed_date else None
+                             })
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
 
 

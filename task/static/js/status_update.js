@@ -15,6 +15,36 @@ $(document).ready(function () {
         return cookieValue;
     }
 
+    function formatMoscowTime(isoString) {
+        if (!isoString) {
+            return '';
+        }
+        try {
+            const date = new Date(isoString);
+            // Проверяем, удалось ли распарсить дату
+            if (isNaN(date.getTime())) {
+                console.error("Не удалось распарсить дату:", isoString);
+                return ''; // Возвращаем пустую строку или сообщение об ошибке
+            }
+
+            const options = {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZone: 'Europe/Moscow' // Указываем нужный часовой пояс
+            };
+            let formattedString = new Intl.DateTimeFormat('ru-Ru', options).format(date);
+            formattedString = formattedString.replace(', ', ' ');
+
+            return formattedString;
+        } catch (e) {
+            console.error("Ошибка форматирования даты:", e);
+            return ''; // Обработка ошибок при форматировании
+        }
+    }
+
     const csrftoken = getCookie('csrftoken');
 
     // Обработка клика по статусу задачи
@@ -51,12 +81,13 @@ $(document).ready(function () {
                                 if (update.is_completed) {
                                     $subtaskIndicator.html('<span class="checkmark">✔</span>');
                                     // Обновляем дату выполнения
+                                    const formattedTime = formatMoscowTime(data.completed_date);
                                     $subtaskIndicator.closest('.subtask-item')
                                         .find('.subtask-description')
                                         .find('.small.text-muted')
                                         .remove()
                                         .end()
-                                        .append('<span class="small text-muted">' + update.completed_date + '</span>');
+                                        .append('<span class="small text-muted">' + formattedTime + '</span>');
                                 } else {
                                     $subtaskIndicator.html('');
                                     $subtaskIndicator.closest('.subtask-item')
@@ -91,12 +122,13 @@ $(document).ready(function () {
                     if (data.is_completed) {
                         $indicator.html('<span class="checkmark">✔</span>');
                         // Обновляем дату выполнения
+                        const formattedTime = formatMoscowTime(data.completed_date);
                         $indicator.closest('.subtask-item')
                             .find('.subtask-description')
                             .find('.small.text-muted')
                             .remove()
                             .end()
-                            .append('<span class="small text-muted">' + data.completed_date + '</span>');
+                            .append('<span class="small text-muted">' + formattedTime + '</span>');
                     } else {
                         $indicator.html('');
                         // Удаляем дату выполнения
