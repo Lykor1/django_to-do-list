@@ -24,8 +24,13 @@
                     </div>
                     <hr class="purple-line">
                     <p class="task-category"><strong>Категория:</strong> {{ task.category.name }}</p>
-                    <p class="task-due-date"><strong>Срок
-                        выполнения:</strong> {{ task.due_date|date:"d.m.Y H:i"|default:"----" }}</p>
+                    <p class="task-due-date">
+                        <strong>Срок выполнения:</strong>
+                        <span class="due-date-value">{{ task.due_date|date:"d.m.Y H:i"|default:"----" }}</span>
+                        {% if not task.status == 'completed' %}
+                            {{ task.get_relative_due_date }}
+                        {% endif %}
+                    </p>
                     <hr class="purple-line">
                     <div class="subtask-list">
                         {% for subtask in task.subtasks.all %}
