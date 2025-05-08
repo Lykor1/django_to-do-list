@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Категории
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="text-center">Мои категории</h1>
+        <a href="#" class="btn btn-login">Добавить категорию</a>
+        <div class="category-list-container">
+            {% for category in categories %}
+                <div class="category-item">
+                    <div class="category-name-container">
+                        <h2 class="category-name">{{ category.name }}</h2>
+                    </div>
+                    <div class="category-action">
+                        <a href="#" class="btn btn-sm btn-login">Редактировать</a>
+                        <a href="#" class="btn btn-sm btn-cancel">Удалить</a>
+                    </div>
+                </div>
+                {% if not forloop.last %}
+                    <hr class="category-separator">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

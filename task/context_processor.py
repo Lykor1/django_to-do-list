@@ -1,15 +1,19 @@
+from django.contrib.auth.models import AnonymousUser
+
 from task.models import Category, Task
 
 
 def task_context_processor(request):
     context = {
-        'categories': Category.objects.all(),
+        'categories': [],
         'statuses': Task.Status.choices,
         'category': '',
         'status': '',
         'search': '',
         'all': ''
     }
+    if request.user and not isinstance(request.user, AnonymousUser):
+        context['categories'] = Category.objects.filter(user=request.user)
 
     query_params = []
     if 'category' in request.GET:

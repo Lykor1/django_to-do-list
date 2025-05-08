@@ -1059,7 +1059,7 @@ textarea:focus {
     border: none;
     appearance: none;
     border-radius: 0;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
     flex-grow: 1;
     height: 100%;
@@ -1093,7 +1093,7 @@ textarea:focus {
     background-color: #5508bf;
     border: none;
     border-radius: 0;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     cursor: pointer;
 
     height: 100%;
@@ -1137,12 +1137,12 @@ textarea:focus {
 .header-left > .btn,
 .header-left > .dropdown,
 .header-left > .search-form-container {
-     vertical-align: middle; /* Применяем vertical-align ко всем прямым потомкам */
-     display: inline-flex; /* Или flex */
-     align-items: center; /* Центрируем содержимое по вертикали */
-     /* Уберем или закомментируем margin-top/bottom: auto; если добавляли */
-     margin-top: 0;
-     margin-bottom: 0;
+    vertical-align: middle; /* Применяем vertical-align ко всем прямым потомкам */
+    display: inline-flex; /* Или flex */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    /* Уберем или закомментируем margin-top/bottom: auto; если добавляли */
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* Уточнение для input внутри search-form-container, если нужно */
@@ -1165,10 +1165,50 @@ textarea:focus {
 
 /* Уточнение для кнопки сброса */
 .btn-reset {
-     box-sizing: border-box;
-     height: 38px;
-     display: inline-flex;
-     align-items: center;
-     justify-content: center;
-     vertical-align: middle; /* Явно задаем vertical-align */
+    box-sizing: border-box;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle; /* Явно задаем vertical-align */
+}
+
+/* Стили для страницы списка категорий */
+.category-list-container {
+    max-width: 800px; /* Как у task-card */
+    margin: 2rem auto;
+    border: 2px solid #5508bf; /* Как у task-card */
+    border-radius: 8px; /* Как у task-card */
+    padding: 1.5rem; /* Как у task-card */
+    background-color: white; /* Белый фон */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Как у task-card */
+    text-align: left; /* Выравниваем текст слева */
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between; /* Размещаем название и кнопки по краям */
+    align-items: center; /* Выравниваем по вертикали */
+    padding: 1rem 0;
+    margin-bottom: 0; /* Убираем отступ снизу */
+}
+
+.category-name-container {
+    flex-grow: 1; /* Позволяет названию занимать больше места */
+}
+
+.category-name {
+    font-size: 1.25rem;
+    margin-bottom: 0; /* Убираем отступ снизу */
+    color: #5508bf;
+}
+
+.category-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.category-separator {
+    border-top: 1px solid #5508bf;
+    margin: 1rem 0; /* Добавляем отступы сверху и снизу */
 }

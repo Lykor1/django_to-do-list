@@ -6,7 +6,7 @@ from .models import Category, Task, SubTask
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug')
+    list_display = ('name', 'slug', 'user')
     list_display_links = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}

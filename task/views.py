@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse
 from django.views.generic import UpdateView, DeleteView
 from django.utils.timezone import now
 from urllib.parse import urlencode
@@ -93,7 +93,7 @@ def api_change_subtask_status(request, subtask_id):
 @login_required
 def task_create(request):
     if request.method == 'POST':
-        form = TaskCreateForm(request.POST)
+        form = TaskCreateForm(request.user, request.POST)
         formset = SubTaskCreateFormSet(request.POST)
         if form.is_valid() and formset.is_valid():
             task = form.save(commit=False, user=request.user)
@@ -107,7 +107,7 @@ def task_create(request):
         else:
             messages.error(request, 'Ошибка в форме')
     else:
-        form = TaskCreateForm()
+        form = TaskCreateForm(request.user)
         formset = SubTaskCreateFormSet()
     context = {
         'form': form,
@@ -137,6 +137,11 @@ class TaskUpdateView(RedirectToFilteredListMixin, LoginRequiredMixin, UserPasses
         task = self.get_object()
         return self.request.user == task.user
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.POST:
@@ -153,7 +158,7 @@ class TaskUpdateView(RedirectToFilteredListMixin, LoginRequiredMixin, UserPasses
             self.object.save()
             subtask_formset.instance = self.object
             subtask_formset.save()
-            messages.success(self.request, f"Задача '{form.cleaned_data['title']} успешно обновлена!'")
+            messages.success(self.request, f"Задача '{form.cleaned_data['title']}' успешно обновлена!")
             return super().form_valid(form)
         else:
             return self.form_invalid(form)
@@ -170,3 +175,7 @@ class TaskDeleteView(RedirectToFilteredListMixin, LoginRequiredMixin, UserPasses
         response = super().delete(request, *args, **kwargs)
         messages.success(self.request, 'Задача была удалена')
         return response
+
+@login_required
+def category_list(request):
+    return render(request, 'task/category_list.html')

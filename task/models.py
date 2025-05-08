@@ -28,8 +28,9 @@ def get_declension(number, one, few, many):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True, verbose_name='Название')
-    slug = models.SlugField(max_length=50, unique=True, db_index=True, allow_unicode=True)
+    name = models.CharField(max_length=50, verbose_name='Название')
+    slug = models.SlugField(max_length=50, db_index=True, allow_unicode=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', related_name='categories')
 
     def __str__(self):
         return self.name
@@ -67,58 +68,34 @@ class Task(models.Model):
         Возвращает относительный срок выполнения задачи (например, "завтра", "через 2 дня", "через 5 минут").
         """
         if not self.due_date:
-            return "" # Если срок выполнения не установлен
-
+            return ""
         now = timezone.now()
-
-        # Если задача просрочена
         if self.due_date < now:
-            # Можно вернуть "(просрочено)", но вы просили не показывать постоянно
-            return "(просрочено)" # Возвращаем пустую строку для просроченных
-
+            return "(просрочено)"
         time_difference: timedelta = self.due_date - now
-
-        # Разница в секундах
         total_seconds = int(time_difference.total_seconds())
-
-        # Если разница меньше 60 секунд
         if total_seconds < 60:
             return "(менее минуты)"
-
-        # Вычисляем разницу в минутах, часах, днях
         minutes = total_seconds // 60
         hours = total_seconds // 3600
-        days = time_difference.days # timedelta.days уже дает целые дни
-
-        # Проверка на "завтра": если срок выполнения находится на следующий календарный день
-        # и разница по времени меньше 24 часов
+        days = time_difference.days
         now_localized = timezone.localtime(now)
         due_date_localized = timezone.localtime(self.due_date)
-
-        # Начало следующего дня в локальном времени
         tomorrow_start = now_localized.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
-        # Конец следующего дня (начало послезавтрашнего) в локальном времени
         day_after_tomorrow_start = tomorrow_start + timedelta(days=1)
-
-
-        # Если срок выполнения находится в пределах следующего календарного дня
         if tomorrow_start <= due_date_localized < day_after_tomorrow_start:
-             return "(завтра)"
-
-        # Форматирование для дней, часов или минут
+            return "(завтра)"
         if days > 0:
             day_word = get_declension(days, "день", "дня", "дней")
             return f"(через {days} {day_word})"
         elif hours > 0:
-             hour_word = get_declension(hours, "час", "часа", "часов")
-             return f"(через {hours} {hour_word})"
+            hour_word = get_declension(hours, "час", "часа", "часов")
+            return f"(через {hours} {hour_word})"
         elif minutes > 0:
-             minute_word = get_declension(minutes, "минуту", "минуты", "минут")
-             return f"(через {minutes} {minute_word})"
+            minute_word = get_declension(minutes, "минуту", "минуты", "минут")
+            return f"(через {minutes} {minute_word})"
         else:
-             # Этот случай по идее не должен достигаться после проверки < 60 секунд,
-             # но как запасной вариант.
-             return "(менее минуты)"
+            return "(менее минуты)"
 
     @property
     def is_overdue(self):

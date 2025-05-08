@@ -17,11 +17,12 @@ class TaskCreateForm(forms.ModelForm):
                 format='%Y-%m-%dT%H:%M')
         }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['category'].queryset = Category.objects.filter(user=user)
         self.fields['category'].empty_label = None
         try:
-            default_category = Category.objects.get(name='Без категории')
+            default_category = Category.objects.filter(user=user).first()
             self.fields['category'].initial = default_category
         except Category.DoesNotExist:
             pass
