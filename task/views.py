@@ -10,7 +10,7 @@ from django.utils.timezone import now
 from urllib.parse import urlencode
 
 from .models import Task, SubTask, Category
-from .forms import TaskCreateForm, SubTaskCreateFormSet, TaskFilterForm
+from .forms import TaskCreateForm, SubTaskCreateFormSet, TaskFilterForm, CategoryCreateForm
 
 
 def home(request):
@@ -176,6 +176,25 @@ class TaskDeleteView(RedirectToFilteredListMixin, LoginRequiredMixin, UserPasses
         messages.success(self.request, 'Задача была удалена')
         return response
 
+
 @login_required
 def category_list(request):
     return render(request, 'task/category_list.html')
+
+
+
+@login_required
+def category_create(request):
+    if request.method == 'POST':
+        form = CategoryCreateForm(request.POST)
+        if form.is_valid():
+            category = form.save(commit=False, user=request.user)
+            category.save()
+            messages.success(request, f"Категория '{form.cleaned_data['name']}' успешно добавлена")
+            return redirect('task:category_list')
+        else:
+            messages.error(request, 'Ошибка. Проверьте данные')
+    else:
+        form = CategoryCreateForm()
+    return render(request, 'task/category_create.html', {'form': form})
+

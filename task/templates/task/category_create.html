@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}
+    Создание категории
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="text-center">Добавить новую категорию</h1>
+        <div class="task-form-container">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-section">
+                    {% bootstrap_field form.name %}
+                </div>
+                <div class="form-buttons mt-4">
+                    <button class="btn btn-login" type="submit">Сохранить</button>
+                    <a href="{% url 'task:category_list' %}{{ all }}" class="btn btn-cancel">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

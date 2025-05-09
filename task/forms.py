@@ -83,3 +83,20 @@ class TaskFilterForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
+
+
+class CategoryCreateForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ('name',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите название категории'})
+        }
+
+    def save(self, commit=False, user=None):
+        instance = super().save(commit=False)
+        if user:
+            instance.user = user
+        if commit:
+            instance.save()
+        return instance

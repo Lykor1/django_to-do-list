@@ -7,7 +7,7 @@
 {% block content %}
     <div class="container mt-4">
         <h1 class="text-center">Мои категории</h1>
-        <a href="#" class="btn btn-login">Добавить категорию</a>
+        <a href="{% url 'task:category_create' %}{{ all }}" class="btn btn-login">Добавить категорию</a>
         <div class="category-list-container">
             {% for category in categories %}
                 <div class="category-item">
