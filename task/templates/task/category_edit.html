@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
 
-</body>
-</html>
+{% block title %}
+	Редактирование категории
+{% endblock %}
+
+{% block content %}
+	<div class="container mt-4">
+    <h1 class="text-center">Редактирование {{ category.name }}</h1>
+    <div class="task-form-container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-section">
+                {% bootstrap_field form.name %}
+            </div>
+            <div class="form-buttons mt-4">
+                <button type="submit" class="btn btn-login">Сохранить</button>
+                <a href="{% url 'task:category_list' %}{{ all }}" class="btn btn-cancel">Назад</a>
+            </div>
+        </form>
+    </div>
+    </div>
+{% endblock %}

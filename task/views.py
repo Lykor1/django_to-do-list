@@ -182,7 +182,6 @@ def category_list(request):
     return render(request, 'task/category_list.html')
 
 
-
 @login_required
 def category_create(request):
     if request.method == 'POST':
@@ -198,3 +197,26 @@ def category_create(request):
         form = CategoryCreateForm()
     return render(request, 'task/category_create.html', {'form': form})
 
+
+class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Category
+    form_class = CategoryCreateForm
+    template_name = 'task/category_edit.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def test_func(self):
+        category = self.get_object()
+        return self.request.user == category.user
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Category, slug=self.kwargs['slug'], user=self.request.user)
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False, user=self.request.user)
+        self.object.save()
+        messages.success(self.request, f"Категория '{form.cleaned_data['name']}' успешно обновлена")
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('task:category_list')

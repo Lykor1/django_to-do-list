@@ -36,14 +36,22 @@ class Category(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name, allow_unicode=True)
+        base_slug = slugify(self.name, allow_unicode=True)
+        slug = base_slug
+        counter = 1
+        while Category.objects.filter(user=self.user, slug=slug).exclude(id=self.id).exists():
+            slug = f'{base_slug}-{counter}'
+            counter += 1
+        self.slug = slug
         super().save(*args, **kwargs)
 
     class Meta:
         ordering = ('name',)
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+        constraints = [
+            models.UniqueConstraint(fields=['slug', 'user'], name='unique_slug_per_user')
+        ]
 
 
 class Task(models.Model):
