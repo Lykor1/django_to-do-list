@@ -220,3 +220,24 @@ class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('task:category_list')
+
+
+class CategoryDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Category
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def test_func(self):
+        category = self.get_object()
+        return self.request.user == category.user
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Category, slug=self.kwargs['slug'], user=self.request.user)
+
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
+        messages.success(self.request, f"Категория '{self.object.name}' была удалена")
+        return response
+
+    def get_success_url(self):
+        return reverse('task:category_list')

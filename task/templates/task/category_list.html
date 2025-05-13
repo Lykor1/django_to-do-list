@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
 
 {% block title %}
     Категории
@@ -16,7 +18,11 @@
                     </div>
                     <div class="category-action">
                         <a href="{% url 'task:category_edit' category.slug %}{{ all }}" class="btn btn-sm btn-login">Редактировать</a>
-                        <a href="#" class="btn btn-sm btn-cancel">Удалить</a>
+                        {#<a href="{% url 'task:category_delete' category.slug %}" class="btn btn-sm btn-cancel">Удалить</a>#}
+                        <button type="button" class="btn btn-sm btn-cancel" data-bs-toggle="modal"
+                                data-bs-target="#deleteCategoryModal" data-category-slug="{{ category.slug }}"
+                                data-category-name="{{ category.name }}">Удалить
+                        </button>
                     </div>
                 </div>
                 {% if not forloop.last %}
@@ -24,5 +30,31 @@
                 {% endif %}
             {% endfor %}
         </div>
+
+        <div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-labelledby="deleteCategoryModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteCategoryModalLabel">Подтверждение удаления</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        Вы уверены, что хотите удалить категорию "<span id="category-name"></span>"?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-login" data-bs-dismiss="modal">Отмена</button>
+                        <form id="delete-category-form" method="post" action="">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-cancel">Удалить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/delete_category.js' %}"></script>
 {% endblock %}
