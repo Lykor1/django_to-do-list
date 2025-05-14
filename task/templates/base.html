@@ -10,8 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% if current_theme == 'dark' %}
+        <link rel="stylesheet" href="{% static 'css/dark_style.css' %}">
+    {% endif %}
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
           rel="stylesheet">
+    <script src="{% static 'js/theme_switcher.js' %}" defer></script>
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
 <!-- Header -->
@@ -101,7 +106,7 @@
                 </div>
             {% else %}
                 <a href="{% url 'account:login' %}" class="btn btn-login">Войти</a>
-                <a href="{% url 'account:register' %}" class="btn btn-register">Регистрация</a>
+                <a href="{% url 'account:register' %}" class="btn btn-login">Регистрация</a>
             {% endif %}
         </div>
     </div>

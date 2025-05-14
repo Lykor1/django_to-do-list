@@ -114,18 +114,6 @@ header .container {
     text-decoration: none;
 }
 
-/* Кнопка регистрации */
-.btn-register {
-    background-color: #5508bf;
-    color: white;
-}
-
-.btn-register:hover {
-    background-color: #300472;
-    color: white;
-    text-decoration: none;
-}
-
 /* Стили для выпадающего списка */
 .dropdown {
     position: relative;
@@ -1287,4 +1275,14 @@ textarea:focus {
     min-height: 2.5rem;
     box-sizing: border-box;
     padding: 0.5rem 1rem;
+}
+
+.profile-buttons-horizontal-right {
+    display: flex; /* Используем flexbox */
+    flex-direction: row; /* Располагаем элементы (кнопки) в строку */
+    justify-content: flex-end; /* Выравниваем кнопки по правому краю */
+    align-items: center; /* Выравниваем кнопки по вертикали */
+    gap: 1rem; /* Отступ между кнопками */
+    margin-top: 1.5rem; /* Отступ сверху от блока .profile-details */
+    width: 100%; /* Кнопки на всю ширину контейнера */
 }

@@ -1,0 +1,186 @@
+/* Темная тема для сайта */
+body.dark-theme {
+    background-color: #222831; /* Немного светлее, чем #1a1a1a */
+    color: #c0c0c0; /* Немного темнее, чем #eeeeee */
+}
+
+/* Переопределяем цвет текста для всех элементов в темной теме */
+body.dark-theme * {
+    color: #c0c0c0; /* Применяем и ко всем элементам */
+}
+
+/* Стили для ссылок в темной теме */
+body.dark-theme a {
+    color: #8f9bb3; /* Мягкий сине-серый */
+}
+
+body.dark-theme a:hover {
+    color: #d1bded; /* Оставляем этот светлый оттенок */
+}
+
+/* Стили для header в темной теме */
+body.dark-theme header {
+    border-bottom: 2px solid #4e5d70; /* Более темный оттенок */
+    background-color: #2d333d; /* Немного светлее фона body */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Менее интенсивная тень */
+}
+
+/* Стили для логотипа в темной теме */
+body.dark-theme .logo {
+    color: #8f9bb3;
+}
+
+body.dark-theme .logo:hover {
+    color: #d1bded;
+}
+
+/* Общие стили для кнопок в темной теме */
+body.dark-theme .btn {
+    background-color: #394867;
+    color: #ffffff;
+    border-color: #394867;
+}
+
+body.dark-theme .btn:hover {
+    background-color: #576cbc;
+    color: #ffffff;
+}
+
+/* Кнопка входа в темной теме */
+body.dark-theme .btn-login {
+    background-color: #6b7b8c;
+    color: #ffffff;
+    border-color: #6b7b8c;
+}
+
+body.dark-theme .btn-login:hover {
+    background-color: #8997a5;
+    color: #ffffff;
+}
+
+/* Стили для выпадающего списка в темной теме */
+body.dark-theme .dropdown-content {
+    background-color: #2d333d;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid #4e5d70;
+}
+
+body.dark-theme .dropdown-content a {
+    color: #8f9bb3;
+    background-color: #2d333d;
+}
+
+body.dark-theme .dropdown-content a:hover {
+    background-color: #394867;
+    color: #ffffff;
+}
+
+/* Стили для страницы входа в темной теме */
+body.dark-theme .login-container,
+body.dark-theme .password-change-container,
+body.dark-theme .register-container,
+body.dark-theme .profile-container,
+body.dark-theme .task-card,
+body.dark-theme .task-form-container,
+body.dark-theme .category-list-container {
+    border-color: #4e5d70;
+    background-color: #2d333d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .login-title,
+body.dark-theme .password-change-title,
+body.dark-theme .register-title,
+body.dark-theme .profile-title,
+body.dark-theme .form-section h2,
+body.dark-theme .task-title,
+body.dark-theme .subtask-list h4,
+body.dark-theme .category-name {
+    color: #e0e0e0; /* Чуть темнее, чем основной текст */
+}
+
+body.dark-theme .form-field label,
+body.dark-theme .profile-details p,
+body.dark-theme .task-category,
+body.dark-theme .task-due-date,
+body.dark-theme .subtask-description {
+    color: #a6b1bf; /* Еще темнее */
+}
+
+body.dark-theme .form-field input,
+body.dark-theme .form-control {
+    background-color: #333333;
+    color: #c0c0c0;
+    border-color: #4e5d70;
+}
+
+body.dark-theme .form-field input:focus,
+body.dark-theme .form-control:focus,
+body.dark-theme select:focus,
+body.dark-theme textarea:focus {
+    border-color: #8f9bb3;
+    box-shadow: 0 0 0 0.25rem rgba(78, 93, 112, 0.4);
+}
+
+body.dark-theme .btn-cancel {
+    background-color: #2d333d;
+    color: #ff8a80;
+    border-color: #ff8a80;
+}
+
+body.dark-theme .btn-cancel:hover {
+    background-color: #ff8a80;
+    color: #2d333d;
+}
+
+/* Индикаторы статуса задач и подзадач в темной теме */
+body.dark-theme .task-status-indicator,
+body.dark-theme .subtask-status-indicator {
+    background-color: #333333;
+}
+
+body.dark-theme .task-status-not_active,
+body.dark-theme .subtask-status-not_completed {
+    border-color: #66788e;
+}
+
+body.dark-theme .task-status-active {
+    border-color: #8f9bb3;
+}
+
+body.dark-theme .search-form-container {
+    border-color: #4e5d70;
+}
+
+body.dark-theme .custom-search-input {
+    background-color: #333333;
+    color: #c0c0c0;
+}
+
+body.dark-theme .custom-search-input::placeholder {
+    color: #8f9bb3;
+    opacity: 0.7;
+}
+
+body.dark-theme .custom-search-button {
+    background-color: #6b7b8c;
+}
+
+body.dark-theme .custom-search-button:hover {
+    background-color: #8997a5;
+}
+
+body.dark-theme .search-form-container:focus-within {
+    border-color: #8f9bb3;
+    box-shadow: 0 0 0 0.25rem rgba(78, 93, 112, 0.4);
+}
+
+body.dark-theme .pagination .page-item:not(.active) .page-link {
+    color: #8f9bb3;
+    background-color: #2d333d;
+}
+
+body.dark-theme .pagination .page-item:not(.active) .page-link:hover {
+    background-color: #66788e;
+    color: #c0c0c0;
+}

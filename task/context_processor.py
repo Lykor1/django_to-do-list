@@ -33,10 +33,17 @@ def task_context_processor(request):
             context['search'] = f'search={search}'
             query_params.append(context['search'])
     if 'page' in request.GET:
-        page=request.GET['page']
+        page = request.GET['page']
         if page:
             context['page'] = f'page={page}'
             query_params.append(context['page'])
     if query_params:
         context['all'] = f"?{'&'.join(query_params)}"
+    return context
+
+
+def theme_context_processor(request):
+    context = {
+        'current_theme': request.COOKIES.get('theme', 'light'),
+    }
     return context
