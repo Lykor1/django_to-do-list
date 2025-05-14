@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse
 from django.views.generic import UpdateView, DeleteView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.timezone import now
 from urllib.parse import urlencode
 
@@ -36,11 +37,20 @@ def home(request):
             initial['search'] = search
 
         filter_form = TaskFilterForm(initial=initial)
+
+        page_size = 5
+        paginator = Paginator(tasks, page_size)
+        page_number = request.GET.get('page')
+        try:
+            page_number = int(page_number) if page_number else 1
+            page_obj = paginator.get_page(page_number)
+        except (ValueError, EmptyPage, PageNotAnInteger):
+            page_obj = paginator.page(1)
     else:
-        tasks = None
+        page_obj = None
         filter_form = None
     context = {
-        'tasks': tasks,
+        'page_obj': page_obj,
         'filter_form': filter_form,
     }
     return render(request, 'task/home.html', context)

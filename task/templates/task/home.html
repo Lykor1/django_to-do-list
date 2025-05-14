@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% load static %}
+{% load filter_tags %}
 
 {% block title %}
     Домашняя страница
@@ -9,90 +10,122 @@
 {% block content %}
     <div class="container mt-4">
         {% if user.is_authenticated %}
-            {% for task in tasks %}
-                <div class="task-card task-status-{{ task.status|lower }}">
-                    <div class="task-header">
-                        <h2 class="task-title">{{ task.title }}</h2>
-                        <div class="task-status-indicator status-{{ task.status|lower }}"
-                             data-task-id="{{ task.id }}"
-                             data-url="{% url 'task:api_change_task_status' task.id %}"
-                             title="Изменить статус">
-                            {% if task.status == 'completed' %}
-                                <span class="checkmark">&#10004;</span>
+            {% if page_obj %}
+                {% for task in page_obj %}
+                    <div class="task-card task-status-{{ task.status|lower }}">
+                        <div class="task-header">
+                            <h2 class="task-title">{{ task.title }}</h2>
+                            <div class="task-status-indicator status-{{ task.status|lower }}"
+                                 data-task-id="{{ task.id }}"
+                                 data-url="{% url 'task:api_change_task_status' task.id %}"
+                                 title="Изменить статус">
+                                {% if task.status == 'completed' %}
+                                    <span class="checkmark">&#10004;</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr class="purple-line">
+                        <p class="task-category"><strong>Категория:</strong> {{ task.category.name }}</p>
+                        <p class="task-due-date">
+                            <strong>Срок выполнения:</strong>
+                            <span class="due-date-value">{{ task.due_date|date:"d.m.Y H:i"|default:"----" }}</span>
+                            {% if not task.status == 'completed' %}
+                                {{ task.get_relative_due_date }}
                             {% endif %}
+                        </p>
+                        <hr class="purple-line">
+                        <div class="subtask-list">
+                            {% for subtask in task.subtasks.all %}
+                                <div class="subtask-item">
+                                    <div class="subtask-description">
+                                        {{ subtask.description }}
+                                        {% if subtask.is_completed %}
+                                            <p class="small text-muted mb-0">{{ subtask.completed_date|date:"d.m.Y H:i" }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="subtask-status-indicator subtask-status-{{ subtask.is_completed|yesno:'completed,not_completed' }}"
+                                         data-subtask-id="{{ subtask.id }}"
+                                         data-url="{% url 'task:api_change_subtask_status' subtask.id %}"
+                                         title="Изменить статус">
+                                        {% if subtask.is_completed %}
+                                            <span class="checkmark">&#10004;</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% if not forloop.last %}
+                                    <hr class="purple-line subtask-line">
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="task-actions mt-3">
+                            <a href="{% url 'task:task_edit' task.id %}{{ all }}"
+                               class="btn btn-login btn-sm">Редактировать</a>
+                            <button type="button" class="btn btn-cancel btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#deleteTaskModal" data-task-id="{{ task.id }}"
+                                    data-task-title="{{ task.title }}">
+                                Удалить
+                            </button>
                         </div>
                     </div>
-                    <hr class="purple-line">
-                    <p class="task-category"><strong>Категория:</strong> {{ task.category.name }}</p>
-                    <p class="task-due-date">
-                        <strong>Срок выполнения:</strong>
-                        <span class="due-date-value">{{ task.due_date|date:"d.m.Y H:i"|default:"----" }}</span>
-                        {% if not task.status == 'completed' %}
-                            {{ task.get_relative_due_date }}
-                        {% endif %}
-                    </p>
-                    <hr class="purple-line">
-                    <div class="subtask-list">
-                        {% for subtask in task.subtasks.all %}
-                            <div class="subtask-item">
-                                <div class="subtask-description">
-                                    {{ subtask.description }}
-                                    {% if subtask.is_completed %}
-                                        <p class="small text-muted mb-0">{{ subtask.completed_date|date:"d.m.Y H:i" }}</p>
-                                    {% endif %}
-                                </div>
-                                <div class="subtask-status-indicator subtask-status-{{ subtask.is_completed|yesno:'completed,not_completed' }}"
-                                     data-subtask-id="{{ subtask.id }}"
-                                     data-url="{% url 'task:api_change_subtask_status' subtask.id %}"
-                                     title="Изменить статус">
-                                    {% if subtask.is_completed %}
-                                        <span class="checkmark">&#10004;</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% if not forloop.last %}
-                                <hr class="purple-line subtask-line">
+                {% endfor %}
+
+                <!-- Пагинация -->
+                <div class="pagination justify-content-center mt-4">
+                    <ul class="pagination">
+                        <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                            {% if page_obj.has_previous %}
+                                <a href="{% url_replace_param page=page_obj.previous_page_number %}" class="page-link">
+                                    &laquo;
+                                </a>
+                            {% endif %}
+                        </li>
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active">
+                                    <a href="{% url_replace_param page=num %}" class="page-link">{{ num }}</a>
+                                </li>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <li class="page-item">
+                                    <a href="{% url_replace_param page=num %}" class="page-link">{{ num }}</a>
+                                </li>
                             {% endif %}
                         {% endfor %}
-                    </div>
-                    <div class="task-actions mt-3">
-                        <a href="{% url 'task:task_edit' task.id %}{{ all }}"
-                           class="btn btn-login btn-sm">Редактировать</a>
-                        <button type="button" class="btn btn-cancel btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#deleteTaskModal" data-task-id="{{ task.id }}"
-                                data-task-title="{{ task.title }}">
-                            Удалить
-                        </button>
+                        <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                            {% if page_obj.has_next %}
+                                <a href="{% url_replace_param page=page_obj.next_page_number %}" class="page-link">
+                                    &raquo;
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Модальное окно для подтверждения удаления -->
+                <div class="modal fade" id="deleteTaskModal" tabindex="-1" aria-labelledby="deleteTaskModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteTaskModalLabel">Подтверждение удаления</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Закрыть"></button>
+                            </div>
+                            <div class="modal-body">
+                                Вы уверены, что хотите удалить задачу "<span id="task-title"></span>"?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-login" data-bs-dismiss="modal">Отмена</button>
+                                <form id="delete-task-form" method="post" action="">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-cancel">Удалить</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            {% empty %}
+            {% else %}
                 <p class="text-center">Задач пока нет.</p>
-            {% endfor %}
-
-            <!-- Модальное окно для подтверждения удаления -->
-            <div class="modal fade" id="deleteTaskModal" tabindex="-1" aria-labelledby="deleteTaskModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteTaskModalLabel">Подтверждение удаления</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Закрыть"></button>
-                        </div>
-                        <div class="modal-body">
-                            Вы уверены, что хотите удалить задачу "<span id="task-title"></span>"?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-login" data-bs-dismiss="modal">Отмена</button>
-                            <form id="delete-task-form" method="post" action="">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-cancel">Удалить</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {% endif %}
         {% else %}
             <p class="text-center">Авторизуйтесь, чтобы увидеть задачи.</p>
         {% endif %}

@@ -1212,3 +1212,79 @@ textarea:focus {
     border-top: 1px solid #5508bf;
     margin: 1rem 0; /* Добавляем отступы сверху и снизу */
 }
+
+/* Стили для пагинации */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem; /* Добавляем отступ снизу */
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.page-item {
+    margin: 0 0.5rem;
+}
+
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+}
+
+/* Стили для стрелок */
+.page-item:not(.active) .page-link {
+    color: #5508bf;
+    background-color: white;
+    border: none;
+}
+
+.page-item:not(.active) .page-link:hover {
+    background-color: #5508bf;
+    color: white;
+}
+
+/* Стили для активной страницы и номеров */
+.page-item.active .page-link,
+.page-item:not(.disabled) .page-link:not(:first-child):not(:last-child) {
+    background-color: #5508bf;
+    color: white;
+    border: none;
+}
+
+.page-item.active .page-link:hover,
+.page-item:not(.disabled) .page-link:not(:first-child):not(:last-child):hover {
+    background-color: #300472;
+    color: white;
+}
+
+.page-item.disabled .page-link,
+.page-item.disabled span.page-link {
+    color: #b0b0b0;
+    pointer-events: none;
+    background-color: #f8f9fa;
+}
+
+.page-item.disabled span.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+}

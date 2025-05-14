@@ -10,6 +10,7 @@ def task_context_processor(request):
         'category': '',
         'status': '',
         'search': '',
+        'page': '',
         'all': ''
     }
     if request.user and not isinstance(request.user, AnonymousUser):
@@ -31,6 +32,11 @@ def task_context_processor(request):
         if search:
             context['search'] = f'search={search}'
             query_params.append(context['search'])
+    if 'page' in request.GET:
+        page=request.GET['page']
+        if page:
+            context['page'] = f'page={page}'
+            query_params.append(context['page'])
     if query_params:
         context['all'] = f"?{'&'.join(query_params)}"
     return context
