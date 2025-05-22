@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+{% load filter_tags %}
 
 {% block title %}
     Профиль пользователя
@@ -13,6 +14,19 @@
             <p><strong>Имя:</strong> {% if user.first_name %}{{ user.first_name }}{% else %}---{% endif %} </p>
             <p><strong>Фамилия:</strong> {% if user.last_name %}{{ user.last_name }}{% else %}---{% endif %}</p>
             <p><strong>Дата регистрации:</strong> {{ user.date_joined|date:"d.m.Y" }}</p>
+            <p><strong>Всего задачи:</strong> {{ tasks.count }}</p>
+            <p>
+                <strong>Не активные задачи:</strong>
+                <a href="{% url_replace_param status='not_active' %}">{{ not_active_tasks.count }}</a>
+            </p>
+            <p>
+                <strong>Активные задачи:</strong>
+                <a href="{% url_replace_param status='active' %}">{{ active_tasks.count }}</a>
+            </p>
+            <p>
+                <strong>Выполненные задачи:</strong>
+                <a href="{% url_replace_param status='completed' %}">{{ completed_tasks.count }}</a>
+            </p>
         </div>
         <div class="profile-buttons profile-buttons-vertical-left">
             <a href="{% url 'account:profile_edit' %}" class="btn btn-login">Редактировать профиль</a>

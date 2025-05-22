@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
+from task.models import Task
 from .forms import UserRegistrationForm, ProfileEditForm
 
 
@@ -76,7 +77,18 @@ def register(request):
 @login_required
 def profile(request):
     user = request.user
-    return render(request, 'account/profile.html', {'user': user})
+    tasks = Task.objects.filter(user=user)
+    not_active_tasks = tasks.filter(status='not_active')
+    active_tasks = tasks.filter(status='active')
+    completed_tasks = tasks.filter(status='completed')
+    context = {
+        'user': user,
+        'tasks': tasks,
+        'not_active_tasks': not_active_tasks,
+        'active_tasks': active_tasks,
+        'completed_tasks': completed_tasks,
+    }
+    return render(request, 'account/profile.html', context)
 
 
 @login_required
@@ -90,6 +102,7 @@ def profile_edit(request):
     else:
         form = ProfileEditForm(instance=request.user)
     return render(request, 'account/profile_edit.html', {'form': form})
+
 
 @login_required
 def profile_delete(request):
