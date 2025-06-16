@@ -1,5 +1,3 @@
-// static/js/delete_task.js
-
 document.addEventListener('DOMContentLoaded', function () {
     const deleteTaskModal = document.getElementById('deleteTaskModal');
     const deleteForm = document.getElementById('delete-task-form');

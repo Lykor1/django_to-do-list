@@ -8,9 +8,6 @@ User = get_user_model()
 
 
 def get_declension(number, one, few, many):
-    """
-    Возврат правильной формы в зависимости от числа
-    """
     num_str = str(number)
     last_digit = int(num_str[-1])
     if len(num_str) > 1:
@@ -72,9 +69,6 @@ class Task(models.Model):
         return self.title
 
     def get_relative_due_date(self):
-        """
-        Возвращает относительный срок выполнения задачи (например, "завтра", "через 2 дня", "через 5 минут").
-        """
         if not self.due_date:
             return ""
         now = timezone.now()

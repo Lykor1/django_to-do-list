@@ -1,31 +1,26 @@
-/* Темная тема для сайта */
 body.dark-theme {
-    background-color: #222831; /* Немного светлее, чем #1a1a1a */
-    color: #c0c0c0; /* Немного темнее, чем #eeeeee */
+    background-color: #222831;
+    color: #c0c0c0;
 }
 
-/* Переопределяем цвет текста для всех элементов в темной теме */
 body.dark-theme * {
-    color: #c0c0c0; /* Применяем и ко всем элементам */
+    color: #c0c0c0;
 }
 
-/* Стили для ссылок в темной теме */
 body.dark-theme a {
-    color: #8f9bb3; /* Мягкий сине-серый */
+    color: #8f9bb3;
 }
 
 body.dark-theme a:hover {
-    color: #d1bded; /* Оставляем этот светлый оттенок */
+    color: #d1bded;
 }
 
-/* Стили для header в темной теме */
 body.dark-theme header {
-    border-bottom: 2px solid #4e5d70; /* Более темный оттенок */
-    background-color: #2d333d; /* Немного светлее фона body */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Менее интенсивная тень */
+    border-bottom: 2px solid #4e5d70;
+    background-color: #2d333d;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Стили для логотипа в темной теме */
 body.dark-theme .logo {
     color: #8f9bb3;
 }
@@ -34,7 +29,6 @@ body.dark-theme .logo:hover {
     color: #d1bded;
 }
 
-/* Общие стили для кнопок в темной теме */
 body.dark-theme .btn {
     background-color: #394867;
     color: #ffffff;
@@ -46,7 +40,7 @@ body.dark-theme .btn:hover {
     color: #ffffff;
 }
 
-/* Кнопка входа в темной теме */
+
 body.dark-theme .btn-login {
     background-color: #6b7b8c;
     color: #ffffff;
@@ -58,7 +52,6 @@ body.dark-theme .btn-login:hover {
     color: #ffffff;
 }
 
-/* Стили для выпадающего списка в темной теме */
 body.dark-theme .dropdown-content {
     background-color: #2d333d;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -75,7 +68,6 @@ body.dark-theme .dropdown-content a:hover {
     color: #ffffff;
 }
 
-/* Стили для страницы входа в темной теме */
 body.dark-theme .login-container,
 body.dark-theme .password-change-container,
 body.dark-theme .register-container,
@@ -96,7 +88,7 @@ body.dark-theme .form-section h2,
 body.dark-theme .task-title,
 body.dark-theme .subtask-list h4,
 body.dark-theme .category-name {
-    color: #e0e0e0; /* Чуть темнее, чем основной текст */
+    color: #e0e0e0;
 }
 
 body.dark-theme .form-field label,
@@ -104,7 +96,7 @@ body.dark-theme .profile-details p,
 body.dark-theme .task-category,
 body.dark-theme .task-due-date,
 body.dark-theme .subtask-description {
-    color: #a6b1bf; /* Еще темнее */
+    color: #a6b1bf;
 }
 
 body.dark-theme .form-field input,
@@ -133,7 +125,6 @@ body.dark-theme .btn-cancel:hover {
     color: #2d333d;
 }
 
-/* Индикаторы статуса задач и подзадач в темной теме */
 body.dark-theme .task-status-indicator,
 body.dark-theme .subtask-status-indicator {
     background-color: #333333;

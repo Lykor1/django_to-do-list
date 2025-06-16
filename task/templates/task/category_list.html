@@ -18,7 +18,6 @@
                     </div>
                     <div class="category-action">
                         <a href="{% url 'task:category_edit' category.slug %}{{ all }}" class="btn btn-sm btn-login">Редактировать</a>
-                        {#<a href="{% url 'task:category_delete' category.slug %}" class="btn btn-sm btn-cancel">Удалить</a>#}
                         <button type="button" class="btn btn-sm btn-cancel" data-bs-toggle="modal"
                                 data-bs-target="#deleteCategoryModal" data-category-slug="{{ category.slug }}"
                                 data-category-name="{{ category.name }}">Удалить

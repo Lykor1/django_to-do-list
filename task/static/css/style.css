@@ -1,46 +1,43 @@
-/* Базовые стили для всего сайта */
 body {
-    background-color: #ffffff; /* Белый фон */
-    color: #5508bf; /* Основной фиолетовый текст */
-    font-family: 'Ubuntu', Arial, sans-serif; /* Ubuntu как основной шрифт */
+    background-color: #ffffff;
+    color: #5508bf;
+    font-family: 'Ubuntu', Arial, sans-serif;
     font-weight: 400;
-    text-align: center; /* Центрируем текст по умолчанию для body */
-    padding-top: 100px; /* Добавляем верхний отступ, чтобы контент не перекрывался хедером и сообщениями. Возможно, потребуется настроить это значение. */
+    text-align: center;
+    padding-top: 100px;
 }
 
-/* Устанавливаем фиолетовый цвет текста для всех элементов */
 * {
     color: #5508bf;
 }
 
-/* Стили для ссылок */
 a {
     color: #5508bf;
     text-decoration: none;
 }
 
 a:hover {
-    color: #300472; /* Более тёмный фиолетовый для ховера */
+    color: #300472;
     text-decoration: underline;
 }
 
-/* Стили для header */
+
 header {
-    border-bottom: 2px solid #5508bf; /* Тонкая фиолетовая граница снизу */
-    background-color: #ffffff; /* Белый фон */
-    padding: 0.66rem 0; /* Уменьшенный отступ для меньшей высоты */
+    border-bottom: 2px solid #5508bf;
+    background-color: #ffffff;
+    padding: 0.66rem 0;
     box-shadow: 0 2px 5px rgba(85, 8, 191, 0.2);
-    position: fixed; /* Фиксируем хедер */
-    width: 100%; /* Хедер на всю ширину */
-    top: 0; /* Прижимаем к верху */
+    position: fixed;
+    width: 100%;
+    top: 0;
     left: 0;
-    z-index: 1000; /* Высокий z-index, чтобы хедер был поверх всего */
+    z-index: 1000;
 }
 
-/* Стили для контейнера в хедере (остается для выравнивания логотипа и кнопок) */
+
 header .container {
     display: flex;
-    justify-content: space-between; /* Разделяем левую и правую части */
+    justify-content: space-between;
     align-items: center;
     padding: 0 3rem;
     max-width: none;
@@ -48,39 +45,36 @@ header .container {
     width: 100%;
 }
 
-/* Стили для левой части хэдера */
 .header-left {
     display: flex;
-    align-items: center; /* Выравниваем элементы по центру */
-    gap: 1.5rem; /* Отступ между элементами */
-    flex-wrap: wrap; /* Разрешаем перенос */
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
-/* Стили для правой части хэдера */
+
 .header-right {
     display: flex;
     align-items: center;
-    gap: 1rem; /* Отступ между кнопками */
+    gap: 1rem;
 }
 
-/* Стили для логотипа */
+
 .logo {
-    font-family: 'Ubuntu', Arial, sans-serif; /* Ubuntu для лого */
+    font-family: 'Ubuntu', Arial, sans-serif;
     font-size: 1.5rem;
-    font-weight: 700; /* Жирный для пацанского вайба */
+    font-weight: 700;
     text-transform: uppercase;
-    color: #5508bf; /* Тёмный фиолет для лого */
-    transition: color 0.3s ease; /* Плавный ховер */
+    color: #5508bf;
+    transition: color 0.3s ease;
 }
 
 .logo:hover {
-    color: #300472; /* Основной фиолетовый при наведении */
-    text-decoration: none; /* Убираем подчёркивание при ховере */
+    color: #300472;
+    text-decoration: none;
 }
 
-/* Общие стили для кнопок */
 .btn {
-    /*display: inline-block;*/
     padding: 0.5rem 1.25rem;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 500;
@@ -93,15 +87,13 @@ header .container {
     text-decoration: none;
     text-align: center;
     border: 2px solid transparent;
-    /* Добавлены стили для выравнивания */
-    display: inline-flex; /* Используем inline-flex для лучшего центрирования содержимого */
-    align-items: center; /* Центрируем содержимое по вертикали */
-    justify-content: center; /* Центрируем содержимое по горизонтали */
-    height: 38px; /* Задаем фиксированную высоту */
-    box-sizing: border-box; /* Учитываем border и padding в размере */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    box-sizing: border-box;
 }
 
-/* Кнопка входа */
 .btn-login {
     background-color: #5508bf;
     color: white;
@@ -114,7 +106,6 @@ header .container {
     text-decoration: none;
 }
 
-/* Стили для выпадающего списка */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -132,13 +123,12 @@ header .container {
     font-size: 0.9rem;
     text-transform: uppercase;
     transition: all 0.3s ease;
-    position: relative; /* Добавляем для z-index */
-    z-index: 2; /* Чтобы кнопка была над выпадающим списком при раскрытии */
-    /* Добавлены стили для выравнивания */
-    display: inline-flex; /* Используем inline-flex */
-    align-items: center; /* Центрируем содержимое по вертикали */
-    justify-content: center; /* Центрируем содержимое по горизонтали */
-    height: 38px; /* Задаем фиксированную высоту */
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
     box-sizing: border-box;
 }
 
@@ -151,15 +141,15 @@ header .container {
     display: none;
     position: absolute;
     right: 0;
-    top: 100%; /* Прижимаем к нижнему краю кнопки */
+    top: 100%;
     background-color: white;
     min-width: 160px;
     box-shadow: 0 8px 16px 0 rgba(85, 8, 191, 0.2);
     z-index: 1;
-    border-radius: 4px 4px 4px 4px; /* Закругляем только нижние углы */
+    border-radius: 4px 4px 4px 4px;
     overflow: hidden;
     border: 1px solid #5508bf;
-    margin-top: 0; /* Убираем отступ сверху */
+    margin-top: 0;
     transition: opacity 0.2s ease, visibility 0.2s ease;
     opacity: 0;
     visibility: hidden;
@@ -175,10 +165,9 @@ header .container {
     border: none;
     width: 100%;
     font-family: 'Ubuntu', sans-serif;
-    /*font-size: 0.9rem;*/
     cursor: pointer;
     margin: 0;
-    white-space: nowrap; /* Предотвращаем перенос текста */
+    white-space: nowrap;
 }
 
 .dropdown-content a:hover {
@@ -193,16 +182,15 @@ header .container {
     padding: 12px 16px;
     text-align: left;
     background: none;
-    color: #ff0000 !important; /* Красный текст */
+    color: #ff0000 !important;
     transition: all 0.3s ease;
 }
 
 .dropdown-item:hover {
-    background-color: #ff0000 !important; /* Красный фон при наведении */
-    color: white !important; /* Белый текст при наведении */
+    background-color: #ff0000 !important;
+    color: white !important;
 }
 
-/* Делаем кнопку "Выйти" на всю ширину */
 .dropdown-content form {
     margin: 0;
     padding: 0;
@@ -218,7 +206,6 @@ header .container {
     visibility: visible;
 }
 
-/* Стили для страницы входа */
 .login-container {
     max-width: 400px;
     margin: 3rem auto;
@@ -269,19 +256,19 @@ header .container {
 }
 
 .form-field input:focus,
-.form-control:focus, /* Добавляем общий класс Bootstrap для всех полей */
+.form-control:focus,
 select:focus,
 textarea:focus {
-    outline: none; /* Убираем стандартный outline браузера */
-    border-color: #300472; /* Более темный фиолетовый для рамки в фокусе */
-    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4); /* Фиолетовое свечение */
+    outline: none;
+    border-color: #300472;
+    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4);
 }
 
 .form-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
-    gap: 1rem; /* Отступ между кнопками */
+    gap: 1rem;
 }
 
 .btn-cancel {
@@ -297,7 +284,6 @@ textarea:focus {
     text-decoration: none;
 }
 
-/* Ссылка "Забыли пароль?" */
 .forgot-password {
     color: #5508bf;
     text-decoration: underline;
@@ -310,7 +296,6 @@ textarea:focus {
     color: #300472;
 }
 
-/* Ссылка на регистрацию */
 .register-link {
     text-align: center;
     margin-top: 1.5rem;
@@ -327,7 +312,6 @@ textarea:focus {
     color: #300472;
 }
 
-/* Стили для страницы смены пароля */
 .password-change-container {
     max-width: 400px;
     margin: 3rem auto;
@@ -368,10 +352,9 @@ textarea:focus {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
-    gap: 1rem; /* Отступ между кнопками */
+    gap: 1rem;
 }
 
-/* Дополнительные стили для формы регистрации */
 .register-container {
     max-width: 500px;
     margin: 3rem auto;
@@ -420,19 +403,17 @@ textarea:focus {
     margin-top: 0.25rem;
 }
 
-/* Стили для страницы профиля */
 .profile-container {
-    max-width: 600px; /* Или другая подходящая ширина */
+    max-width: 600px;
     margin: 3rem auto;
     padding: 2rem;
     border: 2px solid #5508bf;
     border-radius: 8px;
     background-color: white;
-    /* text-align: center;  - УБРАТЬ, если было */
 }
 
 .profile-title {
-    text-align: center; /* Заголовок можно оставить по центру */
+    text-align: center;
     color: #5508bf;
     margin-bottom: 1.5rem;
     font-weight: 700;
@@ -440,8 +421,8 @@ textarea:focus {
 }
 
 .profile-details {
-    margin-bottom: 2rem; /* Отступ под деталями перед кнопками */
-    text-align: left; /* Выравниваем детали по левому краю */
+    margin-bottom: 2rem;
+    text-align: left;
 }
 
 .profile-details p {
@@ -454,150 +435,136 @@ textarea:focus {
     margin-right: 0.5rem;
 }
 
-/* Стили для блока кнопок (вертикально, слева) */
+
 .profile-buttons-vertical-left {
-    display: flex; /* Используем flexbox */
-    flex-direction: column; /* Располагаем элементы (кнопки) в колонку */
-    align-items: flex-start; /* Выравниваем кнопки по левому краю */
-    gap: 1rem; /* Отступ между кнопками */
-    margin-top: 1.5rem; /* Отступ сверху от блока .profile-details */
-    width: fit-content; /* Ширина блока по содержимому (кнопкам) */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    width: fit-content;
 }
 
-/* Стили для самих кнопок внутри блока */
 .profile-buttons-vertical-left .btn {
-    min-width: 180px; /* Например, чтобы они были одинаковой ширины */
-    text-align: center; /* Текст внутри кнопки по центру */
+    min-width: 180px;
+    text-align: center;
 }
 
-/* Выделяем место для сообщений, чтобы предотвратить прыжки элементов */
+
 .message-area {
-    position: fixed; /* Фиксируем позицию относительно окна браузера */
-    top: 70px; /* Отступ сверху (ниже хедера). Настройте по необходимости */
+    position: fixed;
+    top: 70px;
     left: 0;
     right: 0;
-    z-index: 1050; /* Высокий z-index, чтобы сообщения были поверх всего (выше хедера) */
-    padding: 0 15px; /* Добавляем небольшие горизонтальные отступы */
+    z-index: 1050;
+    padding: 0 15px;
 }
 
 .message-area .container-fluid {
-    /* Дополнительные стили для внутреннего контейнера, если нужно центрировать или ограничить ширину */
-    max-width: 600px; /* Пример: ограничиваем ширину блока сообщений */
-    margin: 0 auto; /* Центрируем блок сообщений по горизонтали */
-    pointer-events: all; /* Включаем клики внутри контейнера, где находятся сами сообщения */
+    max-width: 600px;
+    margin: 0 auto;
+    pointer-events: all;
 }
 
-/* Styles for Task Card */
 .task-card {
-    border: 2px solid; /* Border will be set based on status */
+    border: 2px solid;
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 2rem;
-    background-color: white; /* Default background */
-    position: relative; /* Needed for absolute positioning of status */
+    background-color: white;
+    position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 800px; /* Увеличиваем максимальную ширину */
-    margin: 2rem auto; /* Центрируем блок по горизонтали и добавляем отступ сверху/снизу */
-    text-align: left; /* Выравниваем содержимое карточки по левому краю */
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: left;
 }
 
-/* Task Status Specific Styles */
 .task-status-not_active {
-    border-color: #b0b0b0; /* Grey border */
-    background-color: #f0f0f0; /* Grey background */
+    border-color: #b0b0b0;
+    background-color: #f0f0f0;
 }
 
 .task-status-active {
-    border-color: #5508bf; /* Purple border */
-    background-color: white; /* White background */
+    border-color: #5508bf;
+    background-color: white;
 }
 
 .task-status-completed {
-    border-color: #28a745; /* Green border */
-    background-color: white; /* White background */
+    border-color: #28a745;
+    background-color: white;
 }
 
-/* Task Header (for title and status indicator) */
 .task-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-    text-align: center; /* Центрируем содержимое хедера */
+    text-align: center;
 }
 
-/* Task Title */
 .task-title {
-    text-align: center; /* Центрируем название задачи */
-    flex-grow: 1; /* Allows title to take up available space */
+    text-align: center;
+    flex-grow: 1;
     margin: 0;
-    color: #5508bf; /* Purple text */
+    color: #5508bf;
 }
 
-/* Task Status Indicator Square */
 .task-status-indicator {
     width: 25px;
     height: 25px;
-    border: 2px solid; /* Border will be set based on status */
+    border: 2px solid;
     border-radius: 4px;
     position: absolute;
-    top: 1.5rem; /* Adjust as needed */
-    right: 1.5rem; /* Adjust as needed */
+    top: 1.5rem;
+    right: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
     font-weight: bold;
-    background-color: white; /* Белый фон для квадратика по умолчанию */
-    cursor: pointer; /* Добавляем курсорpointer */
-    transition: transform 0.2s ease, background-color 0.3s ease; /* Добавляем переходы */
+    background-color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
-/* Task Status Indicator Colors */
 .status-not_active {
-    border-color: #b0b0b0; /* Grey border */
-    background-color: #f0f0f0; /* Grey background */
+    border-color: #b0b0b0;
+    background-color: #f0f0f0;
 }
 
 .status-active {
-    border-color: #5508bf; /* Purple border */
-    /* background-color: white; */ /* Уже установлено в .task-status-indicator */
+    border-color: #5508bf;
 }
 
 .status-completed {
-    border-color: #28a745; /* Green border */
-    /* background-color: white; */ /* Уже установлено в .task-status-indicator */
-    color: #28a745; /* Green checkmark color */
+    border-color: #28a745;
+    color: #28a745;
 }
 
-/* Тонкая фиолетовая полоса */
 .purple-line {
     border: 0;
     height: 1px;
-    background: #5508bf; /* Фиолетовый цвет */
+    background: #5508bf;
     margin: 1rem 0;
 }
 
-/* Task Category and Due Date */
 .task-category,
 .task-due-date {
     margin-bottom: 0.5rem;
-    color: #5508bf; /* Purple text */
-    text-align: left; /* Выравниваем по левому краю внутри карточки */
+    color: #5508bf;
+    text-align: left;
 }
 
-/* Subtask List */
 .subtask-list {
     margin-top: 1.5rem;
 }
 
 .subtask-list h4 {
-    color: #5508bf; /* Purple text */
+    color: #5508bf;
     margin-bottom: 1rem;
-    text-align: left; /* Выравниваем по левому краю внутри карточки */
+    text-align: left;
 }
 
-/* Subtask Item */
 .subtask-item {
     display: flex;
     justify-content: space-between;
@@ -605,69 +572,58 @@ textarea:focus {
     margin-bottom: 1rem;
 }
 
-/* Описание подзадачи */
 .subtask-description {
     flex-grow: 1;
     margin-right: 1rem;
-    color: #5508bf; /* Фиолетовый текст */
-    text-align: left; /* Выравниваем по левому краю внутри карточки */
+    color: #5508bf;
+    text-align: left;
     hyphens: auto;
-    overflow-wrap: break-word; /* Перенос длинных слов (современное свойство) */
-    word-break: break-word; /* Принудительный разрыв любых слов (или строк без пробелов) */
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
-/* Квадратик индикатора статуса подзадачи */
 .subtask-status-indicator {
-    width: 20px; /* Убедимся, что ширина задана */
-    height: 20px; /* Убедимся, что высота задана */
-    border: 2px solid; /* Цвет рамки будет установлен в зависимости от статуса */
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
     border-radius: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
     font-weight: bold;
-    background-color: white; /* Белый фон для квадратика по умолчанию */
-    flex-shrink: 0; /* Запрещаем элементу сжиматься */
-    cursor: pointer; /* Добавляем курсорpointer */
-    transition: transform 0.2s ease, background-color 0.3s ease; /* Добавляем переходы */
+    background-color: white;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
-/* Цвета квадратика индикатора статуса подзадачи */
 .subtask-status-not_completed {
-    border-color: #5508bf; /* Фиолетовая рамка */
-    /* background-color: white; */ /* Уже установлено в .subtask-status-indicator */
+    border-color: #5508bf;
 }
 
 .subtask-status-completed {
-    border-color: #28a745; /* Зеленая рамка */
-    /* background-color: white; */ /* Уже установлено в .subtask-status-indicator */
-    color: #28a745; /* Зеленый цвет для галочки */
+    border-color: #28a745;
+    color: #28a745;
 }
 
-/* Дата выполнения подзадачи */
 .subtask-item .small {
-    font-size: 0.8rem; /* Меньший шрифт для даты выполнения */
-    color: #6c757d; /* Приглушенный цвет для даты */
-    /*margin-left: 0.5rem;*/
+    font-size: 0.8rem;
+    color: #6c757d;
 }
 
-/* Фиолетовая полоса для подзадач */
 .purple-line.subtask-line {
-    margin: 0.5rem 0; /* Меньший отступ для линий между подзадачами */
+    margin: 0.5rem 0;
 }
 
-/* Центрируем главный заголовок списка задач */
 .container h1 {
     text-align: center;
 }
 
-/* Центрируем текст, когда задач нет */
 .container .text-center {
     text-align: center;
 }
 
-/* Стили для интерактивных квадратиков */
 .task-status-indicator:hover,
 .subtask-status-indicator:hover {
     transform: scale(1.1);
@@ -679,74 +635,67 @@ textarea:focus {
     transform: scale(0.95);
 }
 
-/* Стили для контейнера формы создания/редактирования задачи */
 .task-form-container {
-    max-width: 700px; /* Ограничьте максимальную ширину формы */
-    margin: 2rem auto; /* Центрируйте форму по горизонтали */
+    max-width: 700px;
+    margin: 2rem auto;
     padding: 2rem;
-    border: 2px solid #5508bf; /* Фиолетовая рамка */
+    border: 2px solid #5508bf;
     border-radius: 8px;
     background-color: white;
-    text-align: left; /* Выравнивание текста внутри формы по левому краю */
+    text-align: left;
 }
 
 .form-section {
-    margin-bottom: 2rem; /* Отступ между секциями формы */
+    margin-bottom: 2rem;
 }
 
 .form-section h2 {
     color: #5508bf;
     margin-bottom: 1.5rem;
-    text-align: center; /* Заголовки секций по центру */
+    text-align: center;
 }
 
-/* Стили для кнопок в форме (Save, Cancel) */
 .form-buttons {
     display: flex;
-    justify-content: space-between; /* Располагает кнопки по краям контейнера */
-    gap: 1rem; /* Отступ между кнопками */
+    justify-content: space-between;
+    gap: 1rem;
 }
 
-/* Стили для полей формы (input, select, textarea) */
 .form-control {
-    /* Ваши существующие стили form-control из style.css */
-    padding: 0.375rem 0.75rem; /* Стандартный padding Bootstrap */
-    font-size: 1rem; /* Стандартный размер шрифта Bootstrap */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
     font-weight: 400;
-    line-height: 1.5; /* Стандартный line-height Bootstrap */
+    line-height: 1.5;
     color: #5508bf;
     background-color: #fff;
     background-clip: padding-box;
-    border: 2px solid #5508bf; /* Фиолетовая рамка */
+    border: 2px solid #5508bf;
     border-radius: 4px;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-/* Стили для полей формы в фокусе */
+
 .form-control:focus {
-    border-color: #300472; /* Более темный фиолетовый для рамки в фокусе */
-    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4); /* Фиолетовое свечение */
-    outline: none; /* Убираем стандартный outline браузера */
+    border-color: #300472;
+    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4);
+    outline: none;
 }
 
 
-/* Выравнивание чекбокса подзадачи (если используется Bootstrap grid) */
 .subtask-form-row .col-md-2 {
     display: flex;
-    align-items: center; /* Выравнивание элементов по центру вертикали */
-    justify-content: center; /* Выравнивание чекбокса по центру горизонтали в колонке */
+    align-items: center;
+    justify-content: center;
 }
 
-/* Стили для кнопки "Добавить задачу" в хедере */
 .btn-add-task {
-    background-color: #5508bf; /* Фиолетовый фон */
-    color: white; /* Белый текст */
+    background-color: #5508bf;
+    color: white;
     border: none;
-    /* Используем базовые стили .btn */
-    display: inline-flex; /* Используем inline-flex */
-    align-items: center; /* Центрируем содержимое по вертикали */
-    justify-content: center; /* Центрируем содержимое по горизонтали */
-    height: 38px; /* Задаем фиксированную высоту */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
     box-sizing: border-box;
     padding: 0.5rem 1.25rem;
     font-family: 'Ubuntu', sans-serif;
@@ -762,71 +711,57 @@ textarea:focus {
 }
 
 .btn-add-task:hover {
-    background-color: #300472; /* Более темный фиолетовый при наведении */
+    background-color: #300472;
     color: white;
     text-decoration: none;
-    border-color: #300472; /* Цвет рамки при наведении */
+    border-color: #300472;
 }
 
-/* Стилизация стандартных чекбоксов Bootstrap */
 .form-check-input {
-    border-color: #5508bf; /* Фиолетовая рамка для невыбранного чекбокса */
-    /* Убедитесь, что фон по умолчанию белый или прозрачный */
+    border-color: #5508bf;
 }
 
 .form-check-input:checked {
-    background-color: #5508bf; /* Фиолетовый фон при выборе */
-    border-color: #5508bf; /* Фиолетовая рамка при выборе */
-    /* Переопределяем стандартную синюю галочку Bootstrap на белую */
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e"); /* Белая галочка в SVG формате */
+    background-color: #5508bf;
+    border-color: #5508bf;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
 }
 
-/* Стилизация чекбокса в фокусе */
 .form-check-input:focus {
-    border-color: #300472; /* Более темная фиолетовая рамка в фокусе */
-    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4); /* Фиолетовое свечение при фокусе */
-    outline: none; /* Убираем стандартный outline браузера */
+    border-color: #300472;
+    box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4);
+    outline: none;
 }
 
-/* Опционально: стилизация текста рядом с чекбоксом (лейбл) */
 .form-check-label {
-    color: #5508bf; /* Убеждаемся, что текст лейбла фиолетовый */
-    /* Возможно, потребуется настроить вертикальное выравнивание, если есть такая необходимость */
+    color: #5508bf;
 }
 
-/* Стили для кнопки "Добавить подзадачу" */
 .btn-add-subtask {
-    /* Наследует базовые стили от класса .btn (если оставлен) */
     display: inline-block;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 500;
-    /* text-transform: uppercase; /* Возможно, для этой кнопки не нужно */
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
-    border-radius: 4px; /* Закругление углов */
-
-    /* Настройка размера */
-    padding: 0.4rem 1rem; /* Уменьшенный padding (можете настроить) */
-    font-size: 0.875rem; /* Меньший размер шрифта (можете настроить) */
-
-    /* Стилистика сайта */
-    background-color: #5508bf; /* Основной фиолетовый фон */
-    color: white; /* Белый текст */
-    border: 2px solid #5508bf; /* Фиолетовая рамка */
+    border-radius: 4px;
+    padding: 0.4rem 1rem;
+    font-size: 0.875rem;
+    background-color: #5508bf;
+    color: white;
+    border: 2px solid #5508bf;
 }
 
 .btn-add-subtask:hover {
-    background-color: #300472; /* Более темный фиолетовый при наведении */
+    background-color: #300472;
     color: white;
     text-decoration: none;
-    border-color: #300472; /* Цвет рамки при наведении */
+    border-color: #300472;
 }
 
 .btn-add-subtask:focus {
-    /* Стили для состояния фокуса, как у других полей/кнопок */
     outline: none;
     border-color: #300472;
     box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4);
@@ -837,35 +772,34 @@ textarea:focus {
     font-size: 0.8rem !important;
 }
 
-/* Стили для модального окна */
 .modal-content {
-    border: 2px solid #5508bf; /* Фиолетовая рамка */
+    border: 2px solid #5508bf;
     border-radius: 8px;
     background-color: white;
     font-family: 'Ubuntu', sans-serif;
 }
 
 .modal-header {
-    border-bottom: 1px solid #5508bf; /* Фиолетовая линия */
-    background-color: #f0f0f0; /* Светло-серый фон */
+    border-bottom: 1px solid #5508bf;
+    background-color: #f0f0f0;
 }
 
 .modal-title {
-    color: #5508bf; /* Фиолетовый заголовок */
+    color: #5508bf;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .modal-body {
-    color: #5508bf; /* Фиолетовый текст */
+    color: #5508bf;
     text-align: center;
 }
 
 .modal-footer {
-    border-top: 1px solid #5508bf; /* Фиолетовая линия */
+    border-top: 1px solid #5508bf;
     display: flex;
-    justify-content: space-between; /* Кнопки по краям */
-    gap: 1rem; /* Отступ между кнопками */
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .modal-footer .btn-cancel {
@@ -892,17 +826,15 @@ textarea:focus {
 }
 
 .btn-close {
-    filter: invert(37%) sepia(93%) saturate(686%) hue-rotate(226deg) brightness(44%) contrast(97%); /* Фиолетовый крестик */
+    filter: invert(37%) sepia(93%) saturate(686%) hue-rotate(226deg) brightness(44%) contrast(97%);
 }
 
-/* Стили для выпадающих списков фильтров */
 .filter-dropdown {
     position: relative;
     display: inline-block;
 }
 
 .btn-dropdown {
-    /* Ваши существующие стили btn-dropdown */
     background-color: #5508bf;
     color: white;
     padding: 0.5rem 1.25rem;
@@ -916,11 +848,10 @@ textarea:focus {
     transition: all 0.3s ease;
     position: relative;
     z-index: 2;
-    /* Добавлены стили для выравнивания */
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 38px; /* Задаем фиксированную высоту */
+    height: 38px;
     box-sizing: border-box;
 }
 
@@ -928,7 +859,7 @@ textarea:focus {
 .filter-dropdown-content {
     display: none;
     position: absolute;
-    left: 0; /* Выравнивание по левому краю кнопки */
+    left: 0;
     top: 100%;
     background-color: white;
     min-width: 160px;
@@ -970,9 +901,7 @@ textarea:focus {
     visibility: visible;
 }
 
-/* Кнопка сброса фильтров */
 .btn-reset {
-    /*display: inline-block;*/
     padding: 0.5rem 1rem;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 500;
@@ -987,11 +916,10 @@ textarea:focus {
     background-color: #5508bf;
     color: white;
     border: none;
-    /* Добавлены стили для выравнивания */
-    display: inline-flex; /* Используем inline-flex */
-    align-items: center; /* Центрируем содержимое по вертикали */
-    justify-content: center; /* Центрируем содержимое по горизонтали */
-    height: 38px; /* Задаем фиксированную высоту */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
     box-sizing: border-box;
 }
 
@@ -1001,40 +929,33 @@ textarea:focus {
     text-decoration: none;
 }
 
-/* Общие стили для кнопок и дропдаунов */
 .btn,
 .btn-dropdown,
 .btn-add-task,
 .btn-reset {
-    /* Ваши существующие стили */
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 38px; /* Фиксированная высота */
+    height: 38px;
     box-sizing: border-box;
     padding: 0.5rem 1.25rem;
-    /* Добавим vertical-align */
     vertical-align: middle;
 }
 
-/* Стили для контейнера формы поиска */
 .search-form-container {
     display: flex;
-    align-items: center; /* Выравниваем элементы внутри контейнера по центру */
+    align-items: center;
     border: 2px solid #5508bf;
     border-radius: 4px;
     overflow: hidden;
     box-sizing: border-box;
-    height: 38px; /* Та же фиксированная высота */
+    height: 38px;
     flex-shrink: 0;
-    /* Попробуем выравнивание с помощью margin: auto */
     margin-top: auto;
     margin-bottom: auto;
-    /* Уберем или закомментируем vertical-align: middle; здесь, если он был */
 }
 
 .custom-search-input {
-    /* Ваши существующие стили */
     display: block;
     width: 100%;
     padding: 0 0.75rem;
@@ -1048,11 +969,9 @@ textarea:focus {
     appearance: none;
     border-radius: 0;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-
     flex-grow: 1;
     height: 100%;
     box-sizing: border-box;
-    /* Добавим vertical-align для самого поля ввода */
     vertical-align: middle;
 }
 
@@ -1070,7 +989,6 @@ textarea:focus {
 }
 
 .custom-search-button {
-    /* Ваши существующие стили */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1087,7 +1005,6 @@ textarea:focus {
     height: 100%;
     box-sizing: border-box;
     flex-shrink: 0;
-    /* Добавим vertical-align */
     vertical-align: middle;
 }
 
@@ -1104,7 +1021,6 @@ textarea:focus {
     border-color: #300472;
 }
 
-/* Стиль для SVG иконки внутри кнопки */
 .custom-search-button svg {
     fill: white;
     width: 1rem;
@@ -1115,79 +1031,77 @@ textarea:focus {
     align-self: center;
 }
 
-/* При фокусе на контейнере делаем его рамку темнее */
+
 .search-form-container:focus-within {
     border-color: #300472;
     box-shadow: 0 0 0 0.25rem rgba(85, 8, 191, 0.4);
 }
 
-/* Дополнительные стили для выравнивания всех элементов в header-left */
+
 .header-left > .btn,
 .header-left > .dropdown,
 .header-left > .search-form-container {
-    vertical-align: middle; /* Применяем vertical-align ко всем прямым потомкам */
-    display: inline-flex; /* Или flex */
-    align-items: center; /* Центрируем содержимое по вертикали */
-    /* Уберем или закомментируем margin-top/bottom: auto; если добавляли */
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
     margin-top: 0;
     margin-bottom: 0;
 }
 
-/* Уточнение для input внутри search-form-container, если нужно */
 .search-form-container .form-control {
     height: 100%;
     padding: 0 0.75rem;
     line-height: 34px;
-    vertical-align: middle; /* Явно задаем vertical-align */
+    vertical-align: middle;
 }
 
-/* Уточнение для кнопок фильтров, чтобы их высота была консистентной */
+
 .btn-dropdown {
     box-sizing: border-box;
     height: 38px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    vertical-align: middle; /* Явно задаем vertical-align */
+    vertical-align: middle;
 }
 
-/* Уточнение для кнопки сброса */
+
 .btn-reset {
     box-sizing: border-box;
     height: 38px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    vertical-align: middle; /* Явно задаем vertical-align */
+    vertical-align: middle;
 }
 
-/* Стили для страницы списка категорий */
+
 .category-list-container {
-    max-width: 800px; /* Как у task-card */
+    max-width: 800px;
     margin: 2rem auto;
-    border: 2px solid #5508bf; /* Как у task-card */
-    border-radius: 8px; /* Как у task-card */
-    padding: 1.5rem; /* Как у task-card */
-    background-color: white; /* Белый фон */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Как у task-card */
-    text-align: left; /* Выравниваем текст слева */
+    border: 2px solid #5508bf;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
 .category-item {
     display: flex;
-    justify-content: space-between; /* Размещаем название и кнопки по краям */
-    align-items: center; /* Выравниваем по вертикали */
+    justify-content: space-between;
+    align-items: center;
     padding: 1rem 0;
-    margin-bottom: 0; /* Убираем отступ снизу */
+    margin-bottom: 0;
 }
 
 .category-name-container {
-    flex-grow: 1; /* Позволяет названию занимать больше места */
+    flex-grow: 1;
 }
 
 .category-name {
     font-size: 1.25rem;
-    margin-bottom: 0; /* Убираем отступ снизу */
+    margin-bottom: 0;
     color: #5508bf;
 }
 
@@ -1198,16 +1112,16 @@ textarea:focus {
 
 .category-separator {
     border-top: 1px solid #5508bf;
-    margin: 1rem 0; /* Добавляем отступы сверху и снизу */
+    margin: 1rem 0;
 }
 
-/* Стили для пагинации */
+
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
-    margin-bottom: 1rem; /* Добавляем отступ снизу */
+    margin-bottom: 1rem;
 }
 
 .pagination ul {
@@ -1234,7 +1148,7 @@ textarea:focus {
     padding: 0.5rem 1rem;
 }
 
-/* Стили для стрелок */
+
 .page-item:not(.active) .page-link {
     color: #5508bf;
     background-color: white;
@@ -1246,7 +1160,7 @@ textarea:focus {
     color: white;
 }
 
-/* Стили для активной страницы и номеров */
+
 .page-item.active .page-link,
 .page-item:not(.disabled) .page-link:not(:first-child):not(:last-child) {
     background-color: #5508bf;
@@ -1278,11 +1192,11 @@ textarea:focus {
 }
 
 .profile-buttons-horizontal-right {
-    display: flex; /* Используем flexbox */
-    flex-direction: row; /* Располагаем элементы (кнопки) в строку */
-    justify-content: flex-end; /* Выравниваем кнопки по правому краю */
-    align-items: center; /* Выравниваем кнопки по вертикали */
-    gap: 1rem; /* Отступ между кнопками */
-    margin-top: 1.5rem; /* Отступ сверху от блока .profile-details */
-    width: 100%; /* Кнопки на всю ширину контейнера */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    width: 100%;
 }

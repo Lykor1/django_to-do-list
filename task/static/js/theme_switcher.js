@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggleButton = document.getElementById('theme-toggle-button');
     const body = document.body;
-    let themeLink = document.getElementById('theme-link'); // Изменил const на let
+    let themeLink = document.getElementById('theme-link');
     const currentTheme = getCookie('theme') || 'light';
 
     function setCookie(name, value, options = {}) {
@@ -31,14 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyTheme(theme) {
-        const darkStyleCssPath = "/static/css/dark_style.css"; // Прямой путь к стилям
+        const darkStyleCssPath = "/static/css/dark_style.css";
 
         if (theme === 'dark') {
             body.classList.add('dark-theme');
             if (themeLink) {
                 themeLink.href = darkStyleCssPath;
             } else {
-                themeLink = document.createElement('link'); // Создаем элемент link, если его нет
+                themeLink = document.createElement('link');
                 themeLink.rel = 'stylesheet';
                 themeLink.href = darkStyleCssPath;
                 themeLink.id = 'theme-link';
@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             body.classList.remove('dark-theme');
             if (themeLink) {
-                themeLink.remove(); // Удаляем элемент link
-                themeLink = null; // Сбрасываем ссылку
+                themeLink.remove();
+                themeLink = null;
             }
         }
     }
